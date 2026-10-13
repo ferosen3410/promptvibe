@@ -1,40 +1,58 @@
 ---
 const prompts = [
   {
-    title: "Karmaşık Belge Özetleme",
+    id: 1,
+    title: "Karmaşık Belge Özetleme & Analiz",
     category: "İş & Analiz",
-    description: "Uzun makaleleri ve raporları 5 maddelik yönetici özetine dönüştürür.",
-    prompt: "Kıdemli bir iş analisti olarak görev yap. Aşağıdaki metni analiz edin ve temel çıkarımları, önemli riskleri ve önerilen sonraki adımları özlü, 5 maddelik bir yönetici özetine dönüştürün:"
+    readTime: "2 dk okuma",
+    likes: 342,
+    description: "Uzun iş raporlarını, PDF'leri ve sözleşmeleri 5 maddelik kritik risk ve eylem planı özetine dönüştürür.",
+    prompt: "Kıdemli bir iş analisti olarak görev yap. Aşağıdaki metni analiz et ve temel çıkarımları, önemli riskleri ve önerilen sonraki adımları özlü, 5 maddelik bir yönetici özetine dönüştür:"
   },
   {
-    title: "Soğuk E-Posta Satış Dizisi",
+    id: 2,
+    title: "Yüksek Dönüşümlü Cold Email Dizisi",
     category: "Pazarlama",
-    description: "B2B SaaS ürünleri için yüksek dönüşümlü 3 adımlı e-posta dizisi hazırlar.",
-    prompt: "Deneyimli bir metin yazarı gibi davranın. Pazarlama direktörlerini hedefleyen bir SaaS ürünü için 3 adımlı, kişiselleştirilmiş bir B2B soğuk e-posta dizisi yazın. Her birini 120 kelimenin altında tutun."
+    readTime: "3 dk okuma",
+    likes: 512,
+    description: "B2B SaaS ve hizmet sektörleri için yanıt alma oranı yüksek, kişiselleştirilebilir 3 adımlı e-posta serisi.",
+    prompt: "Deneyimli bir metin yazarı gibi davran. Pazarlama direktörlerini hedefleyen bir SaaS ürünü için 3 adımlı, kişiselleştirilmiş bir B2B soğuk e-posta dizisi yaz. Her e-postayı 120 kelimenin altında tut:"
   },
   {
-    title: "Kod Refaktörü & Optimizasyonu",
+    id: 3,
+    title: "Clean Code & TypeScript Refactoring",
     category: "Yazılım",
-    description: "Karmaşık ve performanssız kodları TypeScript en iyi pratikleriyle temizler.",
-    prompt: "Kıdemli yazılım mühendisi rolünü üstlenin. Aşağıdaki kod parçasını inceleyin, performans darboğazlarını belirleyin ve temiz kod ilkeleri ve TypeScript en iyi uygulamalarını kullanarak yeniden yazın:"
+    readTime: "4 dk okuma",
+    likes: 890,
+    description: "Spagetti kodları TypeScript en iyi uygulamalarına ve SOLID ilkelerine göre yeniden mimarize eder.",
+    prompt: "Kıdemli yazılım mühendisi rolünü üstlen. Aşağıdaki kod parçasını incele, performans darboğazlarını belirle ve temiz kod ilkeleri ile TypeScript best practice'lerini kullanarak yeniden yaz:"
   },
   {
-    title: "SEO Uyumlu Blog Anahattı",
-    category: "İçerik",
-    description: "Google'da üst sıralara çıkacak detaylı ve H2/H3 yapılı içerik planı üretir.",
-    prompt: "Uzman bir SEO stratejisti olarak davranın. [Konu] hakkında 2000 kelimelik bir blog yazısı için AIDA modelini kullanan, LSI anahtar kelimeleri içeren ve H2/H3 başlık yapısına sahip detaylı bir içerik taslağı oluşturun."
+    id: 4,
+    title: "Google Top 10 SEO Blog Taslağı",
+    category: "SEO",
+    readTime: "2 dk okuma",
+    likes: 275,
+    description: "AIDA modeli ve semantik (LSI) anahtar kelime yapısıyla hazırlanmış kapsamlı içerik planı.",
+    prompt: "Uzman bir SEO stratejisti olarak davran. [Konu] hakkında 2000 kelimelik bir blog yazısı için AIDA modelini kullanan, LSI anahtar kelimeleri içeren ve H2/H3 başlık yapısına sahip detaylı bir içerik taslağı oluştur:"
   },
   {
-    title: "Midjourney Photorealistic Portre",
+    id: 5,
+    title: "Midjourney v6 Photorealistic Portre",
     category: "Görsel & Tasarım",
-    description: "Sinematik, 8k çözünürlükte gerçekçi insan fotoğrafları oluşturmak için prompt.",
+    readTime: "1 dk okuma",
+    likes: 1240,
+    description: "85mm lens stüdyo ışığı efektleriyle stüdyo kalitesinde gerçekçi insan fotoğrafları üretimi.",
     prompt: "A realistic portrait photo of a 30-year-old architect, cinematic lighting, 85mm lens, f/1.8, highly detailed skin texture, professional studio background, hyperrealistic, 8k resolution --ar 16:9 --v 6.0"
   },
   {
-    title: "Müşteri İtiraz Yönetimi",
+    id: 6,
+    title: "Fiyat İtirazlarını Satışa Çevirme",
     category: "Satış",
-    description: "Fiyat ve zamanlama itirazlarını ikna edici şekilde yanıtlamanızı sağlar.",
-    prompt: "Uzman bir B2B satış koçu olun. Potansiyel müşterinin 'Bütçemiz şu an için yetersiz' itirazına karşı kullanılabilecek, empati kuran ve değeri öne çıkaran 3 farklı ikna edici yanıt hazırlayın."
+    readTime: "3 dk okuma",
+    likes: 410,
+    description: "Müşterinin 'Bütçemiz yetersiz' veya 'Pahalı' yanıtlarına empati kurarak değer katan ikna teknikleri.",
+    prompt: "Uzman bir B2B satış koçu ol. Potansiyel müşterinin 'Bütçemiz şu an için yetersiz' itirazına karşı kullanılabilecek, empati kuran ve değeri öne çıkaran 3 farklı ikna edici yanıt seçeneği sun:"
   }
 ];
 ---
@@ -44,115 +62,282 @@ const prompts = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PromptVibe HQ — Savaşta Test Edilmiş AI Prompt Kütüphanesi</title>
+    <title>PromptVibe HQ — Savaşta Test Edilmiş AI Komutları</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Editorial Aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <script>
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
+            fontFamily: {
+              serif: ['Newsreader', 'Georgia', 'serif'],
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+            },
             colors: {
               brand: {
-                500: '#6366f1',
-                600: '#4f46e5',
-                accent: '#a855f7'
+                black: '#0A0A0A',
+                card: '#121212',
+                accent: '#22c55e', // Medium style neon green
+                hover: '#16a34a'
               }
             }
           }
         }
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
       body {
         font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #0A0A0A;
+        color: #E5E7EB;
+      }
+      .font-serif-title {
+        font-family: 'Newsreader', Georgia, serif;
+      }
+      /* Custom Scrollbar for chips */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
     </style>
   </head>
-  <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
-    
-    <!-- Background Glow -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-      <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-      <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
-    </div>
+  <body class="min-h-screen flex flex-col selection:bg-green-500 selection:text-black antialiased">
 
-    <!-- Header / Navbar -->
-    <header class="border-b border-slate-800/80 backdrop-blur-md bg-slate-950/70 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-black text-xl shadow-lg shadow-indigo-500/30">
-            P
-          </div>
-          <span class="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
-            PromptVibe<span class="text-indigo-500">HQ</span>
+    <header class="border-b border-neutral-800/80 bg-brand-black/90 sticky top-0 z-50 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center space-x-3 group">
+          <span class="font-serif-title font-bold text-3xl tracking-tight text-white group-hover:text-green-500 transition-colors">
+            PromptVibe<span class="text-green-500">HQ</span>
           </span>
-        </div>
-        <nav class="flex items-center space-x-4">
-          <a href="#" class="text-sm text-slate-400 hover:text-white transition">Kategoriler</a>
-          <a href="#" class="text-sm text-slate-400 hover:text-white transition">Popüler</a>
-          <a href="#" class="text-sm bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-2 rounded-lg transition shadow-md shadow-indigo-600/20">
-            Prompt Gönder
-          </a>
+        </a>
+        
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-neutral-400">
+          <a href="#prompts" class="hover:text-white transition">Kategoriler</a>
+          <a href="#prompts" class="hover:text-white transition">Popüler</a>
+          <a href="#about" class="hover:text-white transition">Hakkında</a>
+          <a href="#" class="hover:text-white transition">Giriş Yap</a>
         </nav>
+
+        <div class="flex items-center space-x-4">
+          <a href="#prompts" class="bg-white hover:bg-neutral-200 text-black font-semibold text-sm px-5 py-2.5 rounded-full transition duration-200">
+            Başla & Keşfet
+          </a>
+        </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4">
-          🚀 Üretime Hazır Yapay Zeka Komutları
-        </span>
-        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4">
-          ChatGPT & Claude İş Akışlarınızı <br class="hidden sm:inline" />
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-            Işık Hızına Çıkarın
-          </span>
-        </h1>
-        <p class="text-lg text-slate-400">
-          Savaşta test edilmiş, direkt kopyalayıp kullanabileceğiniz profesyonel yapay zeka prompt kütüphanesi.
-        </p>
+    <section class="border-b border-neutral-800 bg-brand-black text-white relative overflow-hidden py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 space-y-6">
+          <h1 class="font-serif-title text-5xl sm:text-7xl font-normal tracking-tight leading-[1.08] text-white">
+            Human prompts <br />
+            <span class="italic font-light text-green-500">& AI engineering.</span>
+          </h1>
+          
+          <p class="text-lg md:text-xl text-neutral-400 max-w-xl font-normal leading-relaxed">
+            ChatGPT, Claude ve Midjourney için mühendislik standartlarında hazırlanmış, savaşta test edilmiş yapay zeka komutları kütüphanesi.
+          </p>
+
+          <div class="pt-4 flex flex-wrap gap-4 items-center">
+            <a href="#prompts" class="bg-green-500 hover:bg-green-600 text-black font-bold px-8 py-3.5 rounded-full text-base transition duration-200 shadow-lg shadow-green-500/10">
+              Promptları Keşfet
+            </a>
+            <span class="text-sm text-neutral-500">Kayıt olmadan %100 Ücretsiz</span>
+          </div>
+        </div>
+
+        <!-- Medium-inspired Vector Illustration Art -->
+        <div class="lg:col-span-5 relative flex justify-center items-center">
+          <div class="w-full max-w-md h-80 relative flex items-center justify-center">
+            <!-- Flower/Aesthetic Art Vector -->
+            <svg class="w-72 h-72 text-green-500 opacity-90 animate-pulse" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C87.1,14.6,81.6,29.2,73.1,41.8C64.6,54.4,53,65,39.6,72.4C26.1,79.8,10.8,84,-4.1,86.5C-19,89,-33.8,89.8,-46.8,83.1C-59.8,76.4,-71,62.2,-78.3,46.7C-85.6,31.2,-89,14.4,-87.3,-1.7C-85.6,-17.8,-78.8,-33.2,-68.9,-45.4C-59,-57.6,-46,-66.6,-32.7,-74.3C-19.4,-82,-5.8,-88.4,7.1,-87.9C20,-87.4,20.6,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-serif-title italic text-4xl text-black font-bold">PromptVibe</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="prompts" class="max-w-7xl mx-auto px-6 py-10 w-full flex-grow">
+      
+      <!-- Search Bar -->
+      <div class="mb-8 max-w-2xl">
+        <div class="relative">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Prompt ara (Örn: SEO, E-posta, TypeScript, Midjourney)..."
+            class="w-full bg-brand-card border border-neutral-800 text-white rounded-full py-4 pl-12 pr-4 focus:outline-none focus:border-green-500 transition duration-200 text-sm"
+          />
+          <svg class="w-5 h-5 text-neutral-500 absolute left-4 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
       </div>
 
-      <!-- Prompt Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Categories Navigation Chips -->
+      <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar pb-6 border-b border-neutral-800/80 mb-10" id="categoryChips">
+        <button class="category-btn active px-4 py-2 rounded-full text-xs font-semibold bg-green-500 text-black whitespace-nowrap transition" data-category="Tümü">Tümü</button>
+        <button class="category-btn px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 whitespace-nowrap transition" data-category="İş & Analiz">İş & Analiz</button>
+        <button class="category-btn px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 whitespace-nowrap transition" data-category="Pazarlama">Pazarlama</button>
+        <button class="category-btn px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 whitespace-nowrap transition" data-category="Yazılım">Yazılım</button>
+        <button class="category-btn px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 whitespace-nowrap transition" data-category="SEO">SEO</button>
+        <button class="category-btn px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 whitespace-nowrap transition" data-category="Görsel & Tasarım">Görsel & Tasarım</button>
+        <button class="category-btn px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-800 whitespace-nowrap transition" data-category="Satış">Satış</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="promptGrid">
         {prompts.map((item) => (
-          <div class="group relative bg-slate-900/60 border border-slate-800 rounded-2xl p-6 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between backdrop-blur-sm">
+          <article class="prompt-card bg-brand-card border border-neutral-800/90 rounded-2xl p-6 flex flex-col justify-between hover:border-neutral-600 transition-all duration-300 group" data-category={item.category} data-title={item.title.toLowerCase()} data-prompt={item.prompt.toLowerCase()}>
+            
             <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 text-indigo-400 border border-slate-700">
-                  {item.category}
-                </span>
+              <!-- Meta Info Header -->
+              <div class="flex items-center justify-between text-xs text-neutral-500 mb-3">
+                <span class="text-green-500 font-semibold uppercase tracking-wider">{item.category}</span>
+                <span>{item.readTime}</span>
               </div>
-              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
+
+              <!-- Card Title -->
+              <h2 class="font-serif-title text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors">
                 {item.title}
-              </h3>
-              <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+              </h2>
+
+              <!-- Description -->
+              <p class="text-neutral-400 text-sm leading-relaxed mb-6 font-normal">
                 {item.description}
               </p>
             </div>
 
-            <div class="mt-4 pt-4 border-t border-slate-800/80">
-              <div class="bg-slate-950 rounded-xl p-3 text-xs text-slate-300 font-mono mb-4 border border-slate-800/60 line-clamp-3 select-all">
+            <!-- Prompt Box & Action -->
+            <div class="pt-4 border-t border-neutral-800/80">
+              <div class="bg-black/80 rounded-xl p-3 text-xs text-neutral-300 font-mono mb-4 border border-neutral-800 line-clamp-3 select-all">
                 {item.prompt}
               </div>
-              <button
-                onclick={`navigator.clipboard.writeText(\`${item.prompt.replace(/`/g, '\\`')}\`); this.innerText = 'Kopyalandı! 🎉'; setTimeout(() => this.innerText = 'Promptu Kopyala 📋', 2000);`}
-                class="w-full py-2.5 px-4 bg-slate-800 hover:bg-indigo-600 text-white font-medium text-sm rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 border border-slate-700/50 hover:border-transparent active:scale-[0.98]"
-              >
-                <span>Promptu Kopyala 📋</span>
-              </button>
+
+              <div class="flex items-center justify-between gap-3">
+                <button
+                  class="copy-btn flex-grow py-2.5 px-4 bg-neutral-900 hover:bg-green-500 hover:text-black text-white font-semibold text-xs rounded-xl transition duration-200 border border-neutral-800 flex items-center justify-center space-x-2"
+                  data-prompt={item.prompt}
+                >
+                  <span>Promptu Kopyala 📋</span>
+                </button>
+                <div class="flex items-center text-xs text-neutral-500 space-x-1 px-2">
+                  <span>❤️</span>
+                  <span>{item.likes}</span>
+                </div>
+              </div>
             </div>
-          </div>
+
+          </article>
         ))}
       </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/80 mt-16 py-8 text-center text-slate-500 text-sm">
-      <p>© 2026 PromptVibe HQ. Tüm hakları saklıdır.</p>
+      <div id="noResults" class="hidden text-center py-16 text-neutral-500">
+        <p class="text-lg">Aradığınız kriterlere uygun prompt bulunamadı.</p>
+      </div>
+    </section>
+
+    <div id="toast" class="fixed bottom-6 right-6 bg-green-500 text-black font-bold px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 z-50 flex items-center space-x-2">
+      <span>🎉</span>
+      <span id="toastMessage">Prompt panoya kopyalandı!</span>
+    </div>
+
+    <footer id="about" class="border-t border-neutral-800 bg-brand-black py-12 text-center text-neutral-500 text-sm">
+      <div class="max-w-7xl mx-auto px-6 space-y-4">
+        <p class="font-serif-title text-xl text-white">PromptVibe HQ</p>
+        <p class="max-w-md mx-auto text-xs text-neutral-500">Yapay zeka modelleri için yüksek kaliteli, optimize edilmiş ve doğrulanmış komut kütüphanesi.</p>
+        <p class="text-xs pt-4">© 2026 PromptVibe HQ. Tüm hakları saklıdır.</p>
+      </div>
     </footer>
 
+    <script>
+      // Interactive Filtering & Search Logic
+      const searchInput = document.getElementById('searchInput');
+      const categoryChips = document.querySelectorAll('.category-btn');
+      const promptCards = document.querySelectorAll('.prompt-card');
+      const noResults = document.getElementById('noResults');
+      const toast = document.getElementById('toast');
+
+      let currentCategory = 'Tümü';
+
+      function filterPrompts() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        promptCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          const title = card.getAttribute('data-title');
+          const promptText = card.getAttribute('data-prompt');
+
+          const matchesCategory = currentCategory === 'Tümü' || category === currentCategory;
+          const matchesSearch = title.includes(query) || promptText.includes(query);
+
+          if (matchesCategory && matchesSearch) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+
+      // Search input handler
+      searchInput?.addEventListener('input', filterPrompts);
+
+      // Category chip handler
+      categoryChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          categoryChips.forEach(c => {
+            c.classList.remove('bg-green-500', 'text-black');
+            c.classList.add('bg-neutral-900', 'text-neutral-300');
+          });
+
+          chip.classList.remove('bg-neutral-900', 'text-neutral-300');
+          chip.classList.add('bg-green-500', 'text-black');
+
+          currentCategory = chip.getAttribute('data-category') || 'Tümü';
+          filterPrompts();
+        });
+      });
+
+      // Copy Prompt functionality with Toast Feedback
+      document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const promptText = button.getAttribute('data-prompt');
+          if (promptText) {
+            navigator.clipboard.writeText(promptText).then(() => {
+              // Show Toast
+              toast.classList.remove('translate-y-20', 'opacity-0');
+              setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+              }, 2500);
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
