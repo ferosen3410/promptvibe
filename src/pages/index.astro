@@ -1,0 +1,115 @@
+---
+// Örnek Prompt Verileri
+const prompts = [
+  {
+    id: 1,
+    title: "Complex Document Summarization",
+    category: "Business",
+    description: "Extract core insights, key risks, and recommended next steps into a concise summary.",
+    promptText: "Act as a senior business analyst. Analyze the following text and extract the core insights, key risks, and recommended next steps into a concise, 5-bullet executive summary:"
+  },
+  {
+    id: 2,
+    title: "Cold Email Outreach Strategy",
+    category: "Marketing",
+    description: "Generate highly persuasive, high-converting B2B cold outreach email templates.",
+    promptText: "Act as an expert copywriter. Write a 3-step personalized B2B cold email sequence for a SaaS product targeting marketing directors. Keep each under 120 words."
+  },
+  {
+    id: 3,
+    title: "Code Refactoring & Optimization",
+    category: "Development",
+    description: "Refactor legacy code for maximum performance, readability, and clean architecture.",
+    promptText: "Act as a principal software engineer. Review the following code snippet, identify performance bottlenecks, and rewrite it using clean code principles and TypeScript best practices:"
+  }
+];
+---
+
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PromptVibe HQ - High Performance AI Prompts</title>
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+    
+    <!-- Navbar -->
+    <header class="border-b border-slate-800/80 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          PromptVibe HQ
+        </a>
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+          Pro Directory
+        </span>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+          Discover & Copy <span class="text-indigo-400">Battle-Tested</span> AI Prompts
+        </h1>
+        <p class="text-slate-400 text-lg">
+          Supercharge your ChatGPT, Claude, and Midjourney workflows with production-ready prompt engineering templates.
+        </p>
+      </div>
+
+      <!-- Prompt Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {prompts.map((item) => (
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:border-slate-700 transition duration-200">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="text-xs font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700/50">
+                  {item.category}
+                </span>
+              </div>
+              <h2 class="text-lg font-bold text-slate-100 mb-2">{item.title}</h2>
+              <p class="text-slate-400 text-sm mb-4 leading-relaxed">{item.description}</p>
+            </div>
+
+            <!-- Prompt Box & Copy Logic -->
+            <div class="bg-slate-950 border border-slate-800/80 rounded-lg p-3 mt-2">
+              <div class="flex justify-between items-center mb-2 pb-2 border-b border-slate-800/60">
+                <span class="text-[10px] font-bold tracking-wider text-slate-500 uppercase">PROMPT</span>
+                <button
+                  type="button"
+                  data-prompt={item.promptText}
+                  class="copy-btn bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded transition duration-150 active:scale-95"
+                >
+                  Copy
+                </button>
+              </div>
+              <p class="text-xs text-slate-300 font-mono line-clamp-3 leading-relaxed">
+                {item.promptText}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+
+    <!-- Interactive Copy Script -->
+    <script>
+      document.querySelectorAll('.copy-btn').forEach((button) => {
+        button.addEventListener('click', async () => {
+          const textToCopy = button.getAttribute('data-prompt');
+          if (textToCopy) {
+            await navigator.clipboard.writeText(textToCopy);
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.classList.replace('bg-indigo-600', 'bg-emerald-600');
+            
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.classList.replace('bg-emerald-600', 'bg-indigo-600');
+            }, 2000);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
