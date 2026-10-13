@@ -40,7 +40,7 @@ const prompts = [
 ---
 
 <!DOCTYPE html>
-<html lang="tr" class="dark">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,75 +48,258 @@ const prompts = [
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #0e0e0e;
+        color: #e0e0e0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .font-serif-title {
+        font-family: 'Newsreader', serif;
+      }
+      .container {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 0 24px;
+        width: 100%;
+      }
+      header {
+        border-bottom: 1px solid #262626;
+        background-color: rgba(14, 14, 14, 0.9);
+        backdrop-filter: blur(8px);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: 80px;
+        display: flex;
+        align-items: center;
+      }
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo-dot {
+        width: 12px;
+        height: 12px;
+        background-color: #22c55e;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      nav a {
+        color: #a3a3a3;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+      nav a:hover {
+        color: #fff;
+      }
+      .btn-primary {
+        background-color: #fff;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background-color 0.2s;
+      }
+      .btn-primary:hover {
+        background-color: #e5e5e5;
+      }
+      .hero {
+        padding: 64px 0;
+        border-bottom: 1px solid #262626;
+        margin-bottom: 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-family: monospace;
+        background-color: #171717;
+        border: 1px solid #262626;
+        color: #22c55e;
+        width: fit-content;
+      }
+      h1 {
+        font-size: 56px;
+        font-weight: 400;
+        line-height: 1.1;
+        color: #fff;
+        letter-spacing: -1px;
+      }
+      h1 span {
+        font-style: italic;
+        color: #a3a3a3;
+      }
+      .hero-p {
+        font-size: 18px;
+        color: #a3a3a3;
+        font-weight: 300;
+        max-w: 600px;
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 32px;
+      }
+      .card {
+        background-color: rgba(23, 23, 23, 0.5);
+        border: 1px solid #262626;
+        border-radius: 16px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.2s;
+      }
+      .card:hover {
+        border-color: #404040;
+      }
+      .category-tag {
+        font-size: 12px;
+        font-family: monospace;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        background-color: #262626;
+        color: #d4d4d4;
+        display: inline-block;
+        margin-bottom: 16px;
+      }
+      .card-title {
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .card-desc {
+        color: #a3a3a3;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+      .prompt-box {
+        background-color: #080808;
+        border: 1px solid #262626;
+        border-radius: 12px;
+        padding: 16px;
+        font-size: 12px;
+        color: #d4d4d4;
+        font-family: monospace;
+        line-height: 1.6;
+        margin-bottom: 16px;
+        max-height: 120px;
+        overflow-y: auto;
+      }
+      .copy-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #262626;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .copy-btn:hover {
+        background-color: #22c55e;
+        color: #000;
+      }
+      footer {
+        border-top: 1px solid #262626;
+        margin-top: 80px;
+        padding: 40px 0;
+        text-align: center;
+        color: #737373;
+        font-size: 12px;
+        font-family: monospace;
+      }
+    </style>
   </head>
-  <body class="bg-[#0e0e0e] text-[#e0e0e0] min-h-screen flex flex-col font-['Plus_Jakarta_Sans',sans-serif] selection:bg-[#22c55e] selection:text-black">
+  <body>
     
     <!-- Navbar -->
-    <header class="border-b border-neutral-800 bg-[#0e0e0e]/90 backdrop-blur-md sticky top-0 z-50">
-      <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="/" class="text-2xl font-['Newsreader',serif] font-bold tracking-tight text-white flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-[#22c55e]"></span>
-          PromptVibe<span class="italic font-normal text-neutral-400">HQ</span>
+    <header>
+      <div class="container header-content">
+        <a href="/" class="logo font-serif-title">
+          <span class="logo-dot"></span>
+          PromptVibe<span style="font-style: italic; font-weight: 400; color: #a3a3a3;">HQ</span>
         </a>
-        <nav class="flex items-center space-x-6 text-sm">
-          <a href="#" class="text-neutral-400 hover:text-white transition-colors">Kategoriler</a>
-          <a href="#" class="text-neutral-400 hover:text-white transition-colors">Popüler</a>
-          <a href="#" class="bg-white text-black font-medium px-5 py-2.5 rounded-full hover:bg-neutral-200 transition-all">
-            Prompt Gönder
-          </a>
+        <nav>
+          <a href="#">Kategoriler</a>
+          <a href="#">Popüler</a>
+          <a href="#" class="btn-primary">Prompt Gönder</a>
         </nav>
       </div>
     </header>
 
     <!-- Hero Section -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-6 py-16">
-      <div class="border-b border-neutral-800 pb-16 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-neutral-900 border border-neutral-800 text-[#22c55e] mb-6">
-            <span>●</span> %100 Ücretsiz Kütüphane
-          </div>
-          <h1 class="text-5xl sm:text-6xl font-['Newsreader',serif] font-normal tracking-tight text-white leading-[1.1] mb-6">
-            Human prompts <br />
-            <span class="italic text-neutral-400">& AI engineering.</span>
-          </h1>
-          <p class="text-lg text-neutral-400 font-light leading-relaxed">
-            ChatGPT, Claude ve Midjourney için mühendislik standartlarında hazırlanmış, üretime hazır yapay zeka komutları kütüphanesi.
-          </p>
+    <main class="container" style="flex-grow: 1;">
+      <div class="hero">
+        <div class="badge">
+          <span>●</span> %100 Ücretsiz Kütüphane
         </div>
-        <div>
-          <a href="#prompts" class="inline-flex items-center gap-2 text-sm font-mono text-[#22c55e] hover:underline">
-            Tüm Komutları Keşfet ↓
-          </a>
-        </div>
+        <h1 class="font-serif-title">
+          Human prompts <br />
+          <span>& AI engineering.</span>
+        </h1>
+        <p class="hero-p">
+          ChatGPT, Claude ve Midjourney için mühendislik standartlarında hazırlanmış, üretime hazır yapay zeka komutları kütüphanesi.
+        </p>
       </div>
 
       <!-- Prompt Grid -->
-      <div id="prompts" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid">
         {prompts.map((item) => (
-          <div class="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-7 hover:border-neutral-700 transition-all flex flex-col justify-between group">
+          <div class="card">
             <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-mono px-3 py-1 rounded-full bg-neutral-800 text-neutral-300">
-                  {item.category}
-                </span>
+              <div>
+                <span class="category-tag">{item.category}</span>
               </div>
-              <h3 class="text-2xl font-['Newsreader',serif] text-white mb-3 group-hover:text-[#22c55e] transition-colors">
-                {item.title}
-              </h3>
-              <p class="text-neutral-400 text-sm font-light mb-6 leading-relaxed">
-                {item.description}
-              </p>
+              <h3 class="card-title font-serif-title">{item.title}</h3>
+              <p class="card-desc">{item.description}</p>
             </div>
 
             <div>
-              <div class="bg-[#080808] rounded-xl p-4 text-xs text-neutral-300 font-mono mb-4 border border-neutral-800/80 leading-relaxed max-h-32 overflow-y-auto">
-                {item.prompt}
-              </div>
+              <div class="prompt-box">{item.prompt}</div>
               <button
+                class="copy-btn"
                 onclick={`navigator.clipboard.writeText(\`${item.prompt.replace(/`/g, '\\`')}\`); this.innerText = 'Kopyalandı! ✓'; setTimeout(() => this.innerText = 'Promptu Kopyala 📋', 2000);`}
-                class="w-full py-3 px-4 bg-neutral-800 hover:bg-[#22c55e] hover:text-black text-white font-medium text-sm rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99]"
               >
-                <span>Promptu Kopyala 📋</span>
+                Promptu Kopyala 📋
               </button>
             </div>
           </div>
@@ -125,8 +308,8 @@ const prompts = [
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-neutral-800 mt-20 py-10 text-center text-neutral-500 text-xs font-mono">
-      <p>© 2026 PromptVibe HQ. All rights reserved.</p>
+    <footer>
+      <p>© 2026 PromptVibe HQ. Tüm hakları saklıdır.</p>
     </footer>
 
   </body>
