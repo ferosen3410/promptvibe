@@ -14,6 +14,16 @@ export interface Category {
   name: string;
   blurb: string;
   description: string[];
+  
+}
+export interface PromptEntry {
+  slug: string;
+  title: string;
+  metaTitle: string;
+  category: CategorySlug;
+  image?: string; // <-- BURAYI EKLE (Soru işareti isteğe bağlı olduğunu belirtir, diğer eski promptlarda hata vermez)
+  summary: string;
+  // ... diğerleri aynı kalır
 }
 
 export interface PromptEntry {
@@ -1371,12 +1381,13 @@ What to look for: the mug on the left third, a plain area on the right, gentle s
     reviewed: '2026-10-18',
   },
 
- // 8 ---------------------------------------------------------------------
+// 8 ---------------------------------------------------------------------
   {
     slug: '90s-nostalgic-couple-photo-transformation',
     title: '90s Supermodel & Nostalgic Film Couple Photo Prompt',
     metaTitle: 'Transform Couple Photos Into 90s Nostalgic Film Style (AI Prompt)',
     category: 'design',
+    image: '/couple-transformation.jpeg',
     summary:
       'Transform a standard posed photo into a candid, black-and-white 90s flash photography masterpiece with a nostalgic film aesthetic.',
     intro: [
