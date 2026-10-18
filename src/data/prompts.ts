@@ -21,9 +21,18 @@ export interface PromptEntry {
   title: string;
   metaTitle: string;
   category: CategorySlug;
-  image?: string; // <-- BURAYI EKLE (Soru işareti isteğe bağlı olduğunu belirtir, diğer eski promptlarda hata vermez)
+  image?: string; // <-- BU SATIRI BURAYA EKLEDİĞİNDEN EMİN OL KANKA
   summary: string;
-  // ... diğerleri aynı kalır
+  intro: string[];
+  prompt: string;
+  variables: { name: string; hint: string }[];
+  steps: string[];
+  example: { input: string; output: string };
+  variations: { situation: string; change: string }[];
+  mistakes: { title: string; detail: string }[];
+  faq: { q: string; a: string }[];
+  published: string;
+  reviewed: string;
 }
 
 export interface PromptEntry {
