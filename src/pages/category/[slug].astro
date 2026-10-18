@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PromptCard from '../../components/PromptCard.astro';
+import { SITE } from '../../data/site';
+import { categories, promptsByCategory, type Category } from '../../data/prompts';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+}
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const items = promptsByCategory(category.slug);
+const others = categories.filter((c) => c.slug !== category.slug);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${category.name} prompts`,
+  description: category.blurb,
+  url: `${SITE.url}/category/${category.slug}`,
+};
+---
+
+<Layout
+  title={`${category.name} AI Prompts`}
+  description={`${category.blurb} ${items.length} ${items.length === 1 ? 'prompt' : 'prompts'} with worked examples and common mistakes.`}
+  jsonLd={jsonLd}
+>
+  <section class="container article-head">
+    <p class="crumbs"><a href="/">Home</a> / <a href="/prompts">All prompts</a> / {category.name}</p>
+    <h1>{category.name} prompts</h1>
+    <div class="prose" style="max-width:68ch">
+      {category.description.map((para) => <p class="muted">{para}</p>)}
+    </div>
+
+    <div class="grid" style="margin-top:1.6em">
+      {items.map((entry) => <PromptCard entry={entry} />)}
+    </div>
+
+    <h2>Other categories</h2>
+    <div class="chips">
+      {others.map((c) => <a class="chip" href={`/category/${c.slug}`}>{c.name}</a>)}
+    </div>
+  </section>
+</Layout>

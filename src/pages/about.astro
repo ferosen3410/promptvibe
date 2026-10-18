@@ -1,93 +1,62 @@
 ---
-const title = "About PromptVibe HQ";
-const description = "Learn about PromptVibe HQ, a library of practical AI prompts and guides.";
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
+import { prompts, categories } from '../data/prompts';
+
+const a = SITE.author;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `About ${SITE.name}`,
+  url: `${SITE.url}/about`,
+};
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | PromptVibe HQ</title>
-    <meta name="description" content={description} />
-    <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://www.promptvibehq.com/about" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <style>
-      *{box-sizing:border-box;margin:0;padding:0}
-      body{background:#0e0e0e;color:#e0e0e0;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column}
-      .container{max-width:900px;width:100%;margin:0 auto;padding:0 24px}
-      header{border-bottom:1px solid #262626;background:rgba(14,14,14,.94);height:80px;display:flex;align-items:center}
-      .header-content{display:flex;justify-content:space-between;align-items:center;gap:24px}
-      .logo{font-family:'Newsreader',serif;font-size:24px;font-weight:700;color:#fff;text-decoration:none;white-space:nowrap}
-      .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;margin-right:8px}
-      nav{display:flex;gap:20px;flex-wrap:wrap}
-      nav a,footer a{color:#a3a3a3;text-decoration:none;font-size:13px}
-      nav a:hover,footer a:hover{color:#fff}
-      main{flex:1;padding-top:58px;padding-bottom:48px}
-      .eyebrow{color:#22c55e;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
-      h1,h2{font-family:'Newsreader',serif;color:#fff}
-      h1{font-size:clamp(36px,6vw,48px);line-height:1.12;margin-bottom:20px}
-      .lead{font-size:18px;line-height:1.8;color:#bdbdbd;margin-bottom:34px}
-      .panel{background:#151515;border:1px solid #292929;border-radius:16px;padding:28px;margin:22px 0}
-      h2{font-size:25px;margin-bottom:14px}
-      p,li{font-size:15px;line-height:1.85;color:#bdbdbd}
-      p+p{margin-top:14px}
-      ul{padding-left:22px;margin-top:12px}
-      li+li{margin-top:8px}
-      a.inline{color:#22c55e}
-      footer{border-top:1px solid #262626;padding:30px 0;text-align:center;color:#737373;font-size:12px}
-      .footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px}
-      @media(max-width:640px){header{height:auto;padding:20px 0}.header-content{align-items:flex-start;flex-direction:column}nav{gap:14px}main{padding-top:38px}.panel{padding:22px}}
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="container header-content">
-        <a href="/" class="logo"><span class="dot"></span>PromptVibe <span style="font-style:italic;font-weight:400;color:#a3a3a3">HQ</span></a>
-        <nav aria-label="Main navigation">
-          <a href="/">Home</a><a href="/prompts">All Prompts</a><a href="/about" aria-current="page">About</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a>
-        </nav>
-      </div>
-    </header>
-    <main class="container">
-      <div class="eyebrow">Who we are</div>
-      <h1>Practical prompts. Clear guidance.</h1>
-      <p class="lead">PromptVibe HQ is a growing library of AI prompts and practical guides designed to help people get started with common writing, research, marketing, coding, and creative tasks.</p>
 
-      <section class="panel">
-        <h2>What you’ll find here</h2>
-        <p>We publish reusable prompt examples, explain what each prompt is intended to do, and provide basic instructions for adapting it to a specific task. Our aim is to make prompt writing easier to understand and use, whether you are experimenting with AI tools or building a repeatable workflow.</p>
-        <p>Prompts are starting points, not guaranteed solutions. Results can vary depending on the AI model, the information you provide, and the way a tool interprets your request. Always review generated material before relying on it or publishing it.</p>
-      </section>
+<Layout
+  title="About"
+  description={`About ${SITE.name}: who writes the prompts, how each page is built and how to report an error.`}
+  jsonLd={jsonLd}
+>
+  <article class="narrow article-head prose">
+    <p class="crumbs"><a href="/">Home</a> / About</p>
+    <h1>About {SITE.name}</h1>
 
-      <section class="panel">
-        <h2>How we approach content</h2>
-        <ul>
-          <li>We organize prompts by topic so visitors can find relevant examples more easily.</li>
-          <li>We aim to provide clear instructions and context instead of presenting a prompt without explanation.</li>
-          <li>We may revise pages to improve clarity, usefulness, accuracy, or the visitor experience.</li>
-          <li>We encourage visitors to adapt prompts to their own goals and independently verify important outputs.</li>
-        </ul>
-      </section>
+    <p>
+      {SITE.name} is a free library of AI prompts for people who want to understand what they paste into a chat box.
+      Today it holds {prompts.length} prompts across {categories.length} categories, and it grows as new ones are written and reviewed.
+    </p>
 
-      <section class="panel">
-        <h2>Independence and limitations</h2>
-        <p>PromptVibe HQ is an independent resource. Unless a page explicitly says otherwise, we are not affiliated with, endorsed by, or sponsored by the AI tools or companies mentioned on this website. Product names and trademarks belong to their respective owners.</p>
-        <p>Content on this website is provided for general informational and educational purposes. It is not professional, legal, financial, medical, or other specialist advice. You are responsible for checking AI-generated results and deciding whether they are suitable for your use.</p>
-      </section>
+    <h2>Who is behind it</h2>
+    <p>
+      I am {a.name}, {a.role}, based in {a.country}. {a.story}
+    </p>
 
-      <section class="panel">
-        <h2>Get in touch</h2>
-        <p>Found an error, have a suggestion, or want to ask a question about the website? Contact us at <a class="inline" href="mailto:support@promptvibehq.com">support@promptvibehq.com</a>.</p>
-      </section>
-    </main>
-    <footer>
-      <div class="container">
-        <div class="footer-links"><a href="/">Home</a><a href="/prompts">All Prompts</a><a href="/about">About</a><a href="/privacy">Privacy Policy</a><a href="/contact">Contact</a></div>
-        <p>© {new Date().getFullYear()} PromptVibe HQ. All rights reserved.</p>
-      </div>
-    </footer>
-  </body>
-</html>
+    <h2>How a prompt page is built</h2>
+    <ol>
+      <li>I start from a real task, such as summarizing a report, planning a content cluster or tuning a query.</li>
+      <li>I write the prompt with named variables so it is clear what you are meant to change.</li>
+      <li>I try it on sample material with {a.models} and rewrite it until the structure of the result is reliable.</li>
+      <li>I add a worked example, variations for other situations and the mistakes I would warn a colleague about.</li>
+      <li>I show a "last reviewed" date and revisit pages when tools change.</li>
+    </ol>
+
+    <h2>What this site is not</h2>
+    <p>
+      It is not a copy of other prompt lists, and it does not promise guaranteed results. AI output can be wrong, incomplete or out of date, so
+      every page encourages you to check facts, numbers and code before you rely on them.
+    </p>
+
+    <h2>Free to use, supported by ads</h2>
+    <p>
+      The prompts are free to use. The site may show advertising to cover running costs. Ads do not influence what is written, and
+      the way advertising and cookies work is described in the <a href="/privacy">Privacy Policy</a>.
+    </p>
+
+    <h2>Corrections and requests</h2>
+    <p>
+      If you find a mistake or want a prompt for a task that is missing, write to
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Corrections are made on the page and the review date is updated.
+    </p>
+  </article>
+</Layout>

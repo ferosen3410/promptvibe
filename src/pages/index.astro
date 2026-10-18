@@ -1,136 +1,86 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import PromptCard from '../components/PromptCard.astro';
+import { SITE } from '../data/site';
+import { categories, prompts, promptsByCategory } from '../data/prompts';
+
+const latest = prompts.slice(0, 6);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+};
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PromptVibe HQ — Battle-Tested AI Prompts Directory</title>
-    <meta name="description" content="Free production-ready AI prompt library for ChatGPT, Claude, and Midjourney." />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { background-color: #0e0e0e; color: #e0e0e0; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-      .font-serif-title { font-family: 'Newsreader', serif; }
-      .container { max-width: 1150px; margin: 0 auto; padding: 0 24px; width: 100%; }
-      header { border-bottom: 1px solid #262626; background-color: rgba(14, 14, 14, 0.9); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; height: 80px; display: flex; align-items: center; }
-      .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-      .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-      .logo-dot { width: 12px; height: 12px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
-      nav { display: flex; align-items: center; gap: 24px; }
-      nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; transition: color 0.2s; }
-      nav a:hover { color: #fff; }
-      
-      .hero { padding: 80px 0 48px 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-      .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 9999px; font-size: 12px; font-family: monospace; background-color: #171717; border: 1px solid #262626; color: #22c55e; }
-      h1 { font-size: 58px; font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; max-width: 800px; }
-      h1 span { font-style: italic; color: #a3a3a3; }
-      .hero-p { font-size: 18px; color: #a3a3a3; font-weight: 300; max-width: 600px; line-height: 1.6; }
-      
-      .cta-buttons { display: flex; gap: 16px; margin-top: 12px; }
-      .btn-main { background-color: #22c55e; color: #000; padding: 14px 28px; border-radius: 9999px; font-weight: 600; text-decoration: none; transition: background-color 0.2s; }
-      .btn-main:hover { background-color: #16a34a; }
-      .btn-sec { background-color: #171717; border: 1px solid #262626; color: #fff; padding: 14px 28px; border-radius: 9999px; font-weight: 500; text-decoration: none; transition: border-color 0.2s; }
-      .btn-sec:hover { border-color: #404040; }
-
-      .categories-section { padding: 48px 0 80px 0; border-top: 1px solid #262626; }
-      .section-title { font-size: 32px; color: #fff; margin-bottom: 32px; text-align: center; }
-      .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-      .cat-card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; padding: 32px; text-decoration: none; transition: all 0.2s; display: flex; flex-direction: column; gap: 12px; }
-      .cat-card:hover { border-color: #22c55e; transform: translateY(-3px); }
-      .cat-card h3 { font-size: 22px; color: #fff; }
-      .cat-card p { font-size: 14px; color: #a3a3a3; font-weight: 300; line-height: 1.5; }
-      .cat-link { font-size: 13px; font-family: monospace; color: #22c55e; margin-top: 8px; }
-
-      footer { border-top: 1px solid #262626; margin-top: auto; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
-      .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
-      .footer-links a { color: #a3a3a3; text-decoration: none; }
-      .footer-links a:hover { color: #fff; }
-    </style>
-  </head>
-  <body>
-    
-    <header>
-      <div class="container header-content">
-        <a href="/" class="logo font-serif-title">
-          <span class="logo-dot"></span>
-          PromptVibe<span style="font-style: italic; font-weight: 400; color: #a3a3a3;">HQ</span>
-        </a>
-        <nav>
-          <a href="/prompts">All Prompts</a>
-          <a href="/about">About</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/contact">Contact</a>
-        </nav>
+<Layout
+  title="Free AI Prompt Library With Worked Examples"
+  description={SITE.description}
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Free AI prompt library</p>
+      <h1>Prompts with the reasoning left in.</h1>
+      <p class="lead">
+        Every prompt here comes with a worked example, variations for different situations and the mistakes that most often
+        ruin the result, so you understand what you are copying and can adapt it.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="/prompts">Browse all prompts</a>
+        <a class="btn ghost" href="/about">How this library works</a>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <main class="container" style="flex-grow: 1;">
-      <div class="hero">
-        <div class="badge">
-          <span>●</span> 100% Free AI Prompt Library
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Browse by category</h2>
+      </div>
+      <div class="grid">
+        {categories.map((c) => (
+          <a class="hub" href={`/category/${c.slug}`}>
+            <h3>{c.name}</h3>
+            <p>{c.blurb}</p>
+            <p class="count">{promptsByCategory(c.slug).length} {promptsByCategory(c.slug).length === 1 ? 'prompt' : 'prompts'}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Latest prompts</h2>
+        <a href="/prompts">See all {prompts.length} prompts</a>
+      </div>
+      <div class="grid">
+        {latest.map((entry) => <PromptCard entry={entry} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-top:0">What you get on every prompt page</h2>
+      <div class="three-col">
+        <div>
+          <h3>A prompt you can read</h3>
+          <p class="muted">Variables are named and explained, so you know exactly which parts to change and which to leave alone.</p>
         </div>
-        <h1 class="font-serif-title">
-          Human prompts <br />
-          <span>& AI engineering.</span>
-        </h1>
-        <p class="hero-p">
-          Discover battle-tested, production-ready artificial intelligence prompts designed for ChatGPT, Claude, and Midjourney.
-        </p>
-        <div class="cta-buttons">
-          <a href="/prompts" class="btn-main">Explore All Prompts →</a>
-          <a href="/about" class="btn-sec">Learn More</a>
+        <div>
+          <h3>A worked example</h3>
+          <p class="muted">A sample input and output that shows the format and level of detail to expect from the prompt.</p>
+        </div>
+        <div>
+          <h3>Variations and pitfalls</h3>
+          <p class="muted">Adjustments for other situations, plus the common mistakes that make results vague or wrong.</p>
         </div>
       </div>
-
-      <div class="categories-section">
-        <h2 class="section-title font-serif-title">Browse Category Hubs</h2>
-        <div class="cat-grid">
-          <a href="/prompts" class="cat-card">
-            <h3 class="font-serif-title">Engineering</h3>
-            <p>Complex document summarization, code analysis, and system architecture prompts.</p>
-            <span class="cat-link">Browse Library →</span>
-          </a>
-          <a href="/prompts" class="cat-card">
-            <h3 class="font-serif-title">Marketing</h3>
-            <p>High-converting cold email sequences, ad copies, and growth strategies.</p>
-            <span class="cat-link">Browse Library →</span>
-          </a>
-          <a href="/prompts" class="cat-card">
-            <h3 class="font-serif-title">Development</h3>
-            <p>TypeScript code refactoring, bug fixing, and clean code optimization workflows.</p>
-            <span class="cat-link">Browse Library →</span>
-          </a>
-          <a href="/prompts" class="cat-card">
-            <h3 class="font-serif-title">Content</h3>
-            <p>SEO-optimized blog outlines, long-form content planning, and copywriting frameworks.</p>
-            <span class="cat-link">Browse Library →</span>
-          </a>
-          <a href="/prompts" class="cat-card">
-            <h3 class="font-serif-title">Design</h3>
-            <p>Photorealistic Midjourney parameters, cinematic lighting setups, and UI design prompts.</p>
-            <span class="cat-link">Browse Library →</span>
-          </a>
-          <a href="/prompts" class="cat-card">
-            <h3 class="font-serif-title">Sales</h3>
-            <p>B2B objection handling strategies, pitch structuring, and conversion scripts.</p>
-            <span class="cat-link">Browse Library →</span>
-          </a>
-        </div>
-      </div>
-    </main>
-
-    <footer>
-      <div class="footer-links">
-        <a href="/">Home</a>
-        <a href="/prompts">All Prompts</a>
-        <a href="/about">About Us</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/contact">Contact</a>
-      </div>
-      <p>© 2026 PromptVibe HQ. All rights reserved.</p>
-    </footer>
-
-  </body>
-</html>
+    </div>
+  </section>
+</Layout>

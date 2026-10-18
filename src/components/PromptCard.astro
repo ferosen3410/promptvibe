@@ -1,0 +1,26 @@
+---
+import Cover from './Cover.astro';
+import { getCategory, readMinutes, type PromptEntry } from '../data/prompts';
+
+interface Props {
+  entry: PromptEntry;
+}
+
+const { entry } = Astro.props;
+const category = getCategory(entry.category);
+const minutes = readMinutes(entry);
+---
+
+<article class="card" data-category={entry.category} data-search={`${entry.title} ${entry.summary} ${category.name}`.toLowerCase()}>
+  <a class="card-link" href={`/prompt/${entry.slug}`}>
+    <div class="card-cover">
+      <Cover category={entry.category} seed={entry.slug} label={`Illustration for ${entry.title}`} />
+    </div>
+    <div class="card-body">
+      <p class="chip">{category.name}</p>
+      <h3>{entry.title}</h3>
+      <p class="muted">{entry.summary}</p>
+      <p class="meta">{minutes} min read</p>
+    </div>
+  </a>
+</article>

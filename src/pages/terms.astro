@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
+---
+
+<Layout
+  title="Terms of Use"
+  description={`The terms for using ${SITE.name}: use of prompts, limits of AI output, links and changes.`}
+>
+  <article class="narrow article-head prose">
+    <p class="crumbs"><a href="/">Home</a> / Terms of Use</p>
+    <h1>Terms of Use</h1>
+    <p class="meta">Last updated: {SITE.legalUpdated}</p>
+
+    <p>By using {SITE.name} you agree to these terms. If you do not agree, please do not use the site.</p>
+
+    <h2>1. Use of the prompts</h2>
+    <p>
+      The prompts on this site are free for personal and commercial use. You may adapt them for your own work. Please do not copy whole pages, articles or the site design and republish them as your own.
+    </p>
+
+    <h2>2. AI output is not advice</h2>
+    <p>
+      Results produced with these prompts come from third-party AI tools and can be wrong, incomplete or out of date. Nothing on this site is legal, medical, financial or other professional advice.
+      You are responsible for checking results and for how you use them.
+    </p>
+
+    <h2>3. No warranty</h2>
+    <p>
+      The site and its content are provided "as is" without warranties of any kind. We do not guarantee that a prompt will give a particular result or that the site will always be available.
+    </p>
+
+    <h2>4. Limitation of liability</h2>
+    <p>
+      To the extent permitted by law, we are not liable for any loss arising from your use of the site or from relying on its content or on output generated with its prompts.
+    </p>
+
+    <h2>5. Third-party tools and links</h2>
+    <p>
+      The prompts are designed to be used with third-party AI services, which have their own terms and privacy practices. Do not paste confidential or personal information into a service unless its terms allow it.
+    </p>
+
+    <h2>6. Advertising</h2>
+    <p>The site may display advertising. How advertising and cookies are handled is described in the <a href="/privacy">Privacy Policy</a>.</p>
+
+    <h2>7. Changes</h2>
+    <p>We may change these terms from time to time. Continued use of the site after a change means you accept the updated terms.</p>
+
+    <h2>8. Contact</h2>
+    <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </article>
+</Layout>

@@ -1,0 +1,132 @@
+---
+// Özgün, telifsiz kapak görseli: kategoriye göre motif, slug'a göre küçük farklılıklar.
+// Stok fotoğraf kullanmaz, bu yüzden lisans ve alakasız görsel sorunu yoktur.
+import type { CategorySlug } from '../data/prompts';
+
+interface Props {
+  category: CategorySlug;
+  seed: string;
+  label?: string;
+}
+
+const { category, seed, label = '' } = Astro.props;
+
+let h = 0;
+for (const ch of seed) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+const pick = (shift: number, min: number, max: number) =>
+  min + (((h >> shift) & 255) / 255) * (max - min);
+
+const palettes: Record<CategorySlug, [string, string, string]> = {
+  analysis: ['#1c2b5a', '#3b5bdb', '#ffd166'],
+  marketing: ['#5a1d2f', '#e5532d', '#ffe3a3'],
+  development: ['#0f2a2e', '#14937f', '#b8f2e6'],
+  content: ['#3a1d5a', '#8e5bd9', '#ffd9f0'],
+  design: ['#1a1a2e', '#e056a0', '#ffb454'],
+  sales: ['#1d3a2a', '#3aa66a', '#f7f0c6'],
+};
+const [c1, c2, c3] = palettes[category];
+
+const uid = `cv-${seed.replace(/[^a-z0-9]/gi, '')}`;
+const dots = Array.from({ length: 5 }, (_, i) => ({
+  cx: pick(i * 3, 40, 520),
+  cy: pick(i * 3 + 1, 40, 590),
+  r: pick(i * 3 + 2, 60, 170),
+}));
+const bars = [70, 120, 95, 170].map((base, i) => base + ((h >> (i * 2)) & 31));
+const points: [number, number][] = [
+  [560, 470],
+  [700, 410],
+  [820, 430],
+  [940, 310],
+  [1060, 200],
+];
+---
+
+<svg
+  viewBox="0 0 1200 630"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label={label}
+  preserveAspectRatio="xMidYMid slice"
+>
+  <defs>
+    <linearGradient id={`${uid}-bg`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color={c1}></stop>
+      <stop offset="1" stop-color={c2}></stop>
+    </linearGradient>
+    <pattern id={`${uid}-grid`} width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#ffffff" opacity="0.16"></circle>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill={`url(#${uid}-bg)`}></rect>
+  <rect width="1200" height="630" fill={`url(#${uid}-grid)`}></rect>
+  {dots.map((d) => <circle cx={d.cx} cy={d.cy} r={d.r} fill={c3} opacity="0.1"></circle>)}
+
+  {category === 'analysis' && (
+    <g>
+      <rect x="640" y="100" width="380" height="430" rx="26" fill="#ffffff" opacity="0.96"></rect>
+      <rect x="680" y="146" width="190" height="22" rx="11" fill={c2}></rect>
+      {[0, 1, 2, 3].map((i) => (
+        <rect x="680" y={196 + i * 34} width={300 - (i % 3) * 56} height="14" rx="7" fill="#1b1f33" opacity="0.18"></rect>
+      ))}
+      {bars.map((bh, i) => (
+        <rect x={694 + i * 74} y={490 - bh} width="46" height={bh} rx="9" fill={i === 3 ? c3 : c2}></rect>
+      ))}
+    </g>
+  )}
+
+  {category === 'marketing' && (
+    <g>
+      <line x1="540" y1="520" x2="1120" y2="520" stroke="#ffffff" stroke-width="4" opacity="0.35"></line>
+      <polyline
+        points={points.map((p) => p.join(',')).join(' ')}
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="14"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></polyline>
+      {points.map((p) => <circle cx={p[0]} cy={p[1]} r="18" fill={c3}></circle>)}
+      <circle cx="1060" cy="200" r="58" fill="none" stroke={c3} stroke-width="6" opacity="0.75"></circle>
+    </g>
+  )}
+
+  {category === 'development' && (
+    <g>
+      <rect x="600" y="100" width="470" height="410" rx="24" fill="#0a1416" opacity="0.93"></rect>
+      <circle cx="640" cy="140" r="8" fill="#ff6b6b"></circle>
+      <circle cx="668" cy="140" r="8" fill="#ffd166"></circle>
+      <circle cx="696" cy="140" r="8" fill="#6bd49b"></circle>
+      <polyline points="720,270 660,330 720,390" fill="none" stroke={c3} stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      <polyline points="950,270 1010,330 950,390" fill="none" stroke={c3} stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      <line x1="860" y1="260" x2="815" y2="400" stroke={c2} stroke-width="16" stroke-linecap="round"></line>
+    </g>
+  )}
+
+  {category === 'content' && (
+    <g>
+      <rect x="600" y="110" width="470" height="270" rx="26" fill="#ffffff" opacity="0.96"></rect>
+      <polygon points="800,180 800,310 910,245" fill={c2}></polygon>
+      <rect x="600" y="420" width="400" height="18" rx="9" fill="#ffffff" opacity="0.85"></rect>
+      <rect x="600" y="458" width="320" height="18" rx="9" fill="#ffffff" opacity="0.55"></rect>
+      <rect x="600" y="496" width="240" height="18" rx="9" fill="#ffffff" opacity="0.35"></rect>
+    </g>
+  )}
+
+  {category === 'design' && (
+    <g>
+      <circle cx="730" cy="290" r="150" fill={c2} opacity="0.92"></circle>
+      <circle cx="880" cy="290" r="150" fill={c3} opacity="0.78" style="mix-blend-mode:screen"></circle>
+      <circle cx="805" cy="410" r="150" fill="#ffffff" opacity="0.42"></circle>
+    </g>
+  )}
+
+  {category === 'sales' && (
+    <g>
+      <polygon points="610,120 1070,120 965,250 715,250" fill="#ffffff" opacity="0.96"></polygon>
+      <polygon points="725,272 955,272 895,388 785,388" fill={c3}></polygon>
+      <polygon points="790,410 890,410 865,510 815,510" fill={c2}></polygon>
+    </g>
+  )}
+</svg>

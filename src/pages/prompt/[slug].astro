@@ -1,280 +1,177 @@
 ---
+import Layout from '../../layouts/Layout.astro';
+import Cover from '../../components/Cover.astro';
+import PromptCard from '../../components/PromptCard.astro';
+import { SITE } from '../../data/site';
+import { prompts, getCategory, relatedPrompts, readMinutes, formatDate, type PromptEntry } from '../../data/prompts';
+
 export function getStaticPaths() {
-  return [
-    { params: { slug: 'complex-document-summarization' } },
-    { params: { slug: 'cold-email-sales-sequence' } },
-    { params: { slug: 'code-refactoring-optimization' } },
-    { params: { slug: 'photorealistic-midjourney-portrait' } },
-    { params: { slug: 'seo-content-pillar-generator' } },
-    { params: { slug: 'sql-query-performance-tuner' } },
-    { params: { slug: 'react-component-clean-architecture' } },
-    { params: { slug: 'youtube-viral-video-hook-script' } },
-    { params: { slug: 'saas-pricing-strategy-generator' } }
-  ];
+  return prompts.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
 }
 
-const { slug } = Astro.params;
+interface Props {
+  entry: PromptEntry;
+}
 
-const contentMap: Record<string, {
-  title: string;
-  category: string;
-  description: string;
-  image: string;
-  promptText: string;
-  instructions: string;
-  articleTitle: string;
-  articleBody: string[];
-}> = {
-  'complex-document-summarization': {
-    title: "Complex Document Summarization Prompt for AI",
-    category: "Engineering & Analysis",
-    description: "Transform lengthy corporate reports, whitepapers, and dense research documents into structured 5-bullet executive summaries.",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as a senior business analyst. Analyze the provided text below. Extract core insights, identify strategic risks, highlight key quantitative metrics, and construct a concise 5-bullet executive summary with actionable recommendations:",
-    instructions: "Paste this prompt into ChatGPT Plus (GPT-4o) or Claude 3.5 Sonnet followed by your document text or attached PDF.",
-    articleTitle: "Why Executive Document Summarization Matters in Modern Workflows",
-    articleBody: [
-      "Processing lengthy legal contracts, corporate quarterly reports, and technical documentation consumes dozens of hours every week for analysts and managers. Standard AI summaries often suffer from surface-level glossing, missing crucial financial metrics or operational risks hidden within fine print.",
-      "This engineered prompt forces Large Language Models (LLMs) to adopt the mindset of a seasoned management consultant. By enforcing a structured 5-bullet hierarchy, it ensures that quantitative data points and strategic vulnerability factors are prioritized over generic fluff.",
-      "For optimal results, ensure your raw input material contains clear section headings or context markers. If you are summarizing technical specifications, you can easily adapt the prompt by specifying your industry domain (e.g., 'Act as a principal software architect') before running the analysis."
-    ]
-  },
-  'cold-email-sales-sequence': {
-    title: "High-Converting B2B Cold Email Sequence Prompt",
-    category: "Marketing & Sales",
-    description: "Generate a personalized 3-step B2B cold outreach email series tailored for SaaS products and high-ticket service offers.",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as an elite direct-response copywriter. Write a 3-step personalized B2B cold email sequence targeting C-level executives for a SaaS solution. Keep each message under 110 words, focus on acute pain points, avoid sales clichés, and include a frictionless call-to-action:",
-    instructions: "Replace target role and industry details in your AI workspace before generating responses.",
-    articleTitle: "Crafting High-Response B2B Sales Outreach with Artificial Intelligence",
-    articleBody: [
-      "Cold email response rates have dramatically declined due to automated spam filters and generic AI template blasts. Decision-makers receive dozens of pitch decks weekly, making brevity and acute personalization the most valuable currency in modern business development.",
-      "This outreach prompt is designed around proven direct-response frameworks. Instead of pitching product features upfront, it prompts the AI model to articulate a single core problem and present a low-friction question that encourages genuine dialog rather than hard resistance.",
-      "When utilizing this prompt in campaign platforms, make sure to pair the output with accurate prospect data merge tags (such as prospect name and company) to ensure maximum deliverability and authentic resonance."
-    ]
-  },
-  'code-refactoring-optimization': {
-    title: "Clean Code Refactoring & Optimization Prompt",
-    category: "Software Development",
-    description: "Refactor legacy codebase snippets using modern TypeScript design patterns, performance optimization, and clean code principles.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Assume the role of a principal software engineer. Review the attached code snippet, identify memory leaks and performance bottlenecks, apply clean code principles, and rewrite it using modern TypeScript best practices with detailed inline comments:",
-    instructions: "Provide your source code directly below the prompt inside triple backticks (```).",
-    articleTitle: "Accelerating Code Maintenance and Debt Reduction via AI",
-    articleBody: [
-      "Technical debt accumulates quickly in fast-paced software startups. Over time, unoptimized nested loops, redundant state transformations, and missing error handlers degrade application stability and developer velocity.",
-      "Using AI for automated code review requires guiding the model toward specific architectural patterns. This refactoring prompt instructs the AI to evaluate algorithmic time complexity (Big-O notation) and modern typing standards rather than making simple cosmetic syntax edits.",
-      "Always verify AI-generated refactored code with unit testing and integration suites in local staging environments prior to production deployment."
-    ]
-  },
-  'photorealistic-midjourney-portrait': {
-    title: "Photorealistic Studio Portrait Midjourney Prompt",
-    category: "Design & Midjourney",
-    description: "Engineered prompt parameters for producing hyperrealistic 8K studio photography and portrait images with Midjourney v6.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
-    promptText: "A realistic portrait photo of a 30-year-old architect, cinematic lighting, 85mm lens, f/1.8, highly detailed skin texture, subtle background bokeh, professional studio lighting, hyperrealistic, 8k resolution --ar 16:9 --v 6.0",
-    instructions: "Copy directly into Midjourney Discord (/imagine) or Midjourney Web alpha generator.",
-    articleTitle: "Mastering Photographic Camera Parameters in Midjourney v6",
-    articleBody: [
-      "AI generative image models often produce plastic-looking skin or unnatural uncanny studio lighting when given simple natural language descriptions. Achieving true photographic realism requires specifying optical parameters such as focal length, aperture values, and specific lighting rigs.",
-      "By specifying an '85mm lens' at 'f/1.8', this prompt instructs the rendering engine to simulate genuine depth of field and optical compression, creating professional portrait isolation from background elements.",
-      "You can customize subject characteristics such as age, profession, attire, or color grade while maintaining the lens parameters to achieve consistent visual quality across an entire campaign."
-    ]
-  },
-  'seo-content-pillar-generator': {
-    title: "SEO Content Pillar & Cluster Strategy Prompt",
-    category: "Content & SEO",
-    description: "Build comprehensive topic cluster maps and content pillar strategies designed to dominate Google search engine rankings.",
-    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as an enterprise SEO director. Create a detailed topic cluster and pillar page content architecture for the niche '[Niche]'. List 1 primary pillar topic, 6 supporting sub-cluster articles, target search intent, and suggested H2 headings for each:",
-    instructions: "Insert your target niche or industry keyword in the brackets before executing.",
-    articleTitle: "Scaling Organic Traffic with Semantic Topic Clusters",
-    articleBody: [
-      "Google's core ranking algorithms heavily reward topical authority rather than isolated keyword stuffing. Creating interconnected topic clusters signals to search engine crawlers that your website possesses comprehensive domain expertise.",
-      "This prompt establishes an enterprise-grade content hierarchy, ensuring internal linking strategies flow seamlessly between broad pillar guides and niche long-tail articles.",
-      "Use the generated output to map out your editorial content calendar for the upcoming quarter to build steady organic compounding traffic."
-    ]
-  },
-  'sql-query-performance-tuner': {
-    title: "Advanced SQL Query Performance Tuner Prompt",
-    category: "Software Development",
-    description: "Optimize slow-running database queries, analyze execution plans, and suggest proper indexing strategies.",
-    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as a senior database administrator (DBA). Review the following SQL query, identify bottlenecks causing table scans, optimize the JOIN structure, and recommend proper indexing strategies for PostgreSQL:",
-    instructions: "Paste your database schema and slow query below the prompt text.",
-    articleTitle: "Eliminating Database Bottlenecks Through Smart Query Tuning",
-    articleBody: [
-      "Database performance degradation is one of the primary catalysts for application scaling failures. Inefficient JOIN operations and unindexed foreign keys can quickly turn milliseconds of response time into sluggish multi-second delays.",
-      "This prompt directs the AI to evaluate query execution structures, recommend composite indexes, and rewrite subqueries into high-performance CTEs (Common Table Expressions) where appropriate.",
-      "Always test query optimizations on staging databases with realistic production data volumes before deploying modifications to live environments."
-    ]
-  },
-  'react-component-clean-architecture': {
-    title: "React Functional Component Clean Architecture Prompt",
-    category: "Software Development",
-    description: "Design modular, high-performance React components using custom hooks, TypeScript types, and accessibility best practices.",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as a principal frontend architect. Write a production-ready React component using TypeScript, Tailwind CSS, and custom hooks. Implement proper memoization, accessibility (WAI-ARIA roles), and robust prop typing:",
-    instructions: "Specify your UI component requirements (e.g., 'Data table with sorting and filtering') after the prompt.",
-    articleTitle: "Scaling Frontend Applications with Clean Component Architecture",
-    articleBody: [
-      "As frontend web applications expand, unorganized React components lead to massive bundle sizes, prop-drilling headaches, and sluggish re-renders. Enforcing strict component boundaries and extracting logic into custom hooks is vital for maintainability.",
-      "This prompt guides the AI to structure components following atomic design principles while integrating strict TypeScript interfaces and accessibility attributes out of the box.",
-      "Review the generated hook segregation to ensure state management remains localized and efficient across complex component trees."
-    ]
-  },
-  'youtube-viral-video-hook-script': {
-    title: "YouTube Viral Video Hook & Script Structure Prompt",
-    category: "Content & Media",
-    description: "Engineer high-retention video intros and structured YouTube scripts designed to maximize audience retention metrics.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as an expert YouTube growth strategist. Create a 30-second high-retention video hook and complete structured script outline for a video titled '[Video Title]'. Focus on emotional triggers, open loops, and fast-paced pacing:",
-    instructions: "Input your target video title or content concept in brackets before running.",
-    articleTitle: "Mastering Audience Retention Through Strategic Script Engineering",
-    articleBody: [
-      "The first 30 seconds of any digital video determine whether viewers stay or click away. YouTube's recommendation algorithm heavily weights audience retention curves when determining organic reach and impression distribution.",
-      "This prompt avoids slow introductions or channel branding fluff, forcing the AI model to construct an instant 'open loop' psychological hook followed by rapid pacing frameworks.",
-      "Pair the generated script sections with dynamic B-roll suggestions to maintain sustained visual engagement throughout the core content delivery."
-    ]
-  },
-  'saas-pricing-strategy-generator': {
-    title: "SaaS Tiered Pricing & Packaging Strategy Prompt",
-    category: "Business & Growth",
-    description: "Design value-based tiered pricing models and packaging frameworks for B2B and consumer SaaS software products.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-    promptText: "Act as a veteran SaaS pricing strategist. Design a 3-tier value-based pricing and feature packaging model for a software product solving '[Problem/Niche]'. Include recommended monthly price points, usage metrics, and upgrade triggers:",
-    instructions: "Describe your core software solution briefly after filling in the niche details.",
-    articleTitle: "Optimizing SaaS Monetization Through Value-Based Packaging",
-    articleBody: [
-      "Pricing is often the most neglected growth lever for early-stage software startups. Relying on guesswork or arbitrary flat-rate pricing leaves substantial recurring revenue on the table and misaligns product value from customer willingness to pay.",
-      "This prompt evaluates feature gating strategies based on true usage metrics (such as active seats, data throughput, or API calls) rather than arbitrary artificial limitations.",
-      "Test the resulting pricing tiers against your target customer segments during user discovery calls to validate psychological price anchoring before public launch."
-    ]
-  }
-};
+const { entry } = Astro.props;
+const category = getCategory(entry.category);
+const minutes = readMinutes(entry);
+const related = relatedPrompts(entry, 3);
+const url = `${SITE.url}/prompt/${entry.slug}`;
+const authorName = SITE.author.name.trim();
+const initial = authorName.startsWith('[') ? 'P' : (authorName[0] || 'P').toUpperCase();
 
-const currentData = contentMap[slug || ''] || contentMap['complex-document-summarization'];
-const { title, category, description, image, promptText, instructions, articleTitle, articleBody } = currentData;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: entry.title,
+    description: entry.summary,
+    datePublished: entry.published,
+    dateModified: entry.reviewed,
+    mainEntityOfPage: url,
+    author: { '@type': 'Person', name: SITE.author.name },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: category.name, item: `${SITE.url}/category/${category.slug}` },
+      { '@type': 'ListItem', position: 3, name: entry.title, item: url },
+    ],
+  },
+];
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} — PromptVibe HQ</title>
-    <meta name="description" content={description} />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { background-color: #0e0e0e; color: #e0e0e0; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-      .font-serif-title { font-family: 'Newsreader', serif; }
-      .container { max-width: 900px; margin: 0 auto; padding: 0 24px; width: 100%; }
-      header { border-bottom: 1px solid #262626; background-color: rgba(14, 14, 14, 0.9); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; height: 80px; display: flex; align-items: center; }
-      .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-      .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-      .logo-dot { width: 12px; height: 12px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
-      nav { display: flex; align-items: center; gap: 24px; }
-      nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; transition: color 0.2s; }
-      nav a:hover { color: #fff; }
+<Layout title={entry.metaTitle} description={entry.summary} type="article" jsonLd={jsonLd}>
+  <article class="narrow article-head prose">
+    <p class="crumbs">
+      <a href="/">Home</a> / <a href={`/category/${category.slug}`}>{category.name}</a> / {entry.title}
+    </p>
+    <a class="chip" href={`/category/${category.slug}`}>{category.name}</a>
+    <h1>{entry.title}</h1>
+    <p class="lead muted">{entry.summary}</p>
+    <p class="meta">
+      {minutes} min read &middot; Published {formatDate(entry.published)} &middot; Last reviewed {formatDate(entry.reviewed)}
+    </p>
 
-      .back-btn { color: #22c55e; text-decoration: none; font-size: 14px; font-family: monospace; display: inline-block; margin: 32px 0 16px 0; }
-      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #22c55e; display: inline-block; margin-bottom: 16px; }
-      h1 { font-size: 42px; color: #fff; margin-bottom: 16px; line-height: 1.2; }
-      .description { font-size: 18px; color: #a3a3a3; font-weight: 300; line-height: 1.6; margin-bottom: 32px; }
+    <div class="hero-cover">
+      <Cover category={entry.category} seed={entry.slug} label={`Illustration for ${entry.title}`} />
+    </div>
 
-      .adsense-slot { background-color: #121212; border: 1px solid #262626; border-radius: 12px; height: 90px; margin-bottom: 32px; }
+    {entry.intro.map((para) => <p>{para}</p>)}
 
-      .image-container { width: 100%; height: 400px; border-radius: 16px; overflow: hidden; border: 1px solid #262626; margin-bottom: 32px; background-color: #171717; }
-      .image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-      .prompt-card { background-color: #171717; border: 1px solid #262626; border-radius: 16px; padding: 28px; margin-bottom: 32px; }
-      .prompt-header { font-size: 12px; font-family: monospace; color: #22c55e; margin-bottom: 12px; }
-      .prompt-box { background-color: #080808; border: 1px solid #262626; border-radius: 12px; padding: 20px; font-size: 14px; color: #fff; font-family: monospace; line-height: 1.7; margin-bottom: 20px; white-space: pre-wrap; }
-      .copy-btn { width: 100%; padding: 14px; background-color: #22c55e; color: #000; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; }
-      .copy-btn:hover { background-color: #16a34a; }
-
-      .article-section { background-color: rgba(23, 23, 23, 0.4); border: 1px solid #262626; border-radius: 16px; padding: 36px; margin-bottom: 32px; }
-      .article-section h2 { color: #fff; font-size: 26px; margin-bottom: 20px; }
-      .article-section p { color: #b3b3b3; font-size: 16px; line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
-      .article-section p:last-child { margin-bottom: 0; }
-
-      .instructions-card { background-color: #121212; border: 1px solid #262626; border-radius: 12px; padding: 20px; margin-bottom: 32px; color: #a3a3a3; font-size: 14px; line-height: 1.6; }
-      .instructions-card strong { color: #fff; }
-
-      footer { border-top: 1px solid #262626; margin-top: 80px; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
-      .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
-      .footer-links a { color: #a3a3a3; text-decoration: none; }
-      .footer-links a:hover { color: #fff; }
-    </style>
-  </head>
-  <body>
-    
-    <header>
-      <div class="container header-content">
-        <a href="/" class="logo font-serif-title">
-          <span class="logo-dot"></span>
-          PromptVibe<span style="font-style: italic; font-weight: 400; color: #a3a3a3;">HQ</span>
-        </a>
-        <nav>
-          <a href="/prompts">All Prompts</a>
-          <a href="/about">About</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/contact">Contact</a>
-        </nav>
+    <h2>The prompt</h2>
+    <div class="promptbox">
+      <div class="promptbox-head">
+        <span>Copy and paste</span>
+        <button type="button" class="btn copy-btn" data-copy="prompt-text">Copy prompt</button>
       </div>
-    </header>
+      <pre id="prompt-text">{entry.prompt}</pre>
+    </div>
 
-    <main class="container" style="flex-grow: 1;">
-      <a href="/prompts" class="back-btn">← Back to All Prompts</a>
-      
-      <div>
-        <span class="category-tag">{category}</span>
-        <h1 class="font-serif-title">{title}</h1>
-        <p class="description">{description}</p>
+    <h3>What to replace</h3>
+    <div class="table-wrap">
+      <table class="var-table">
+        <thead>
+          <tr><th>Variable</th><th>What to put there</th></tr>
+        </thead>
+        <tbody>
+          {entry.variables.map((v) => (
+            <tr><td><code>{v.name}</code></td><td>{v.hint}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>How to use it</h2>
+    <ol>
+      {entry.steps.map((s) => <li>{s}</li>)}
+    </ol>
+
+    <h2>Worked example</h2>
+    <p class="notice">
+      This example was written for this page to show the format. Results from your own model and your own material will differ, so run the prompt yourself before relying on it.
+    </p>
+    <div class="example">
+      <div class="example-block">
+        <h3>Input</h3>
+        <pre>{entry.example.input}</pre>
       </div>
-
-      <div class="adsense-slot"></div>
-
-      <div class="image-container">
-        <img src={image} alt={title} />
+      <div class="example-block">
+        <h3>Output</h3>
+        <pre>{entry.example.output}</pre>
       </div>
+    </div>
 
-      <div class="prompt-card">
-        <div class="prompt-header">COPYABLE PROMPT COMMAND</div>
-        <div class="prompt-box" id="pContent">{promptText}</div>
-        <button 
-          class="copy-btn"
-          onclick="navigator.clipboard.writeText(document.getElementById('pContent').innerText); this.innerText='Copied to Clipboard! ✓'; setTimeout(()=>this.innerText='Copy Prompt 📋', 2000)"
-        >
-          Copy Prompt 📋
-        </button>
-      </div>
+    <h2>Variations</h2>
+    <div class="table-wrap">
+      <table class="var-table">
+        <thead>
+          <tr><th>Situation</th><th>What to change</th></tr>
+        </thead>
+        <tbody>
+          {entry.variations.map((v) => (
+            <tr><td>{v.situation}</td><td>{v.change}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
-      <div class="instructions-card">
-        <strong>Usage Recommendation:</strong> {instructions}
-      </div>
+    <h2>Common mistakes</h2>
+    <ul>
+      {entry.mistakes.map((m) => <li><strong>{m.title}.</strong> {m.detail}</li>)}
+    </ul>
 
-      <div class="adsense-slot"></div>
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      {entry.faq.map((f) => (
+        <>
+          <h3>{f.q}</h3>
+          <p>{f.a}</p>
+        </>
+      ))}
+    </div>
 
-      <article class="article-section">
-        <h2 class="font-serif-title">{articleTitle}</h2>
-        {articleBody.map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
-      </article>
-    </main>
+    <aside class="author-box" aria-label="About the author">
+      <div class="avatar" aria-hidden="true">{initial}</div>
+      <p>
+        <strong>{SITE.author.name}</strong>, {SITE.author.role}. Questions or corrections about this prompt?
+        <a href="/contact">Get in touch</a> and the page will be updated with a new review date.
+      </p>
+    </aside>
+  </article>
 
-    <footer>
-      <div class="footer-links">
-        <a href="/">Home</a>
-        <a href="/prompts">All Prompts</a>
-        <a href="/about">About Us</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/contact">Contact</a>
-      </div>
-      <p>© 2026 PromptVibe HQ. All rights reserved.</p>
-    </footer>
+  <section class="container section">
+    <div class="section-head"><h2 style="margin-top:0">More prompts</h2></div>
+    <div class="grid">
+      {related.map((r) => <PromptCard entry={r} />)}
+    </div>
+  </section>
+</Layout>
 
-  </body>
-</html>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.dataset.copy || '');
+      if (!target) return;
+      const original = btn.textContent;
+      try {
+        await navigator.clipboard.writeText(target.textContent || '');
+        btn.textContent = 'Copied';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(target);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+        btn.textContent = 'Press Ctrl+C';
+      }
+      setTimeout(() => {
+        btn.textContent = original;
+      }, 2000);
+    });
+  });
+</script>

@@ -1,11 +1,10 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-import tailwindcss from '@tailwindcss/vite';
-
-// https://astro.build/config
+// Sitenizde zaten bir astro.config.mjs (ve varsa adapter) varsa sadece
+// `site` ve `integrations: [sitemap()]` satırlarını kendi dosyanıza ekleyin.
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  }
+  site: 'https://www.promptvibehq.com',
+  integrations: [sitemap()],
+  trailingSlash: 'ignore',
 });
