@@ -14,7 +14,11 @@ const minutes = readMinutes(entry);
 <article class="card" data-category={entry.category} data-search={`${entry.title} ${entry.summary} ${category.name}`.toLowerCase()}>
   <a class="card-link" href={`/prompt/${entry.slug}`}>
     <div class="card-cover">
-      <Cover category={entry.category} seed={entry.slug} label={`Illustration for ${entry.title}`} />
+      {entry.image ? (
+        <img src={entry.image} alt={entry.title} style="width: 100%; height: 100%; object-fit: cover;" />
+      ) : (
+        <Cover category={entry.category} seed={entry.slug} label={`Illustration for ${entry.title}`} />
+      )}
     </div>
     <div class="card-body">
       <p class="chip">{category.name}</p>
