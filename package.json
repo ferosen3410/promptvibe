@@ -10,7 +10,7 @@
     "check:placeholders": "node scripts/check-placeholders.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.0.0"
   }
 }

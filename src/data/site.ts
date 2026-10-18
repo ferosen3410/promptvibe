@@ -16,13 +16,13 @@ export const SITE = {
   // Gizlilik ve Kullanım Koşulları sayfalarında gösterilen tarih.
   legalUpdated: 'October 18, 2026',
   author: {
-    name: 'Ferdi',
-    role: 'software developer',
-    country: 'Turkey',
+    name: 'PromptVibe HQ Editorial Team',
+    role: 'AI Prompt Research and Content Development',
+    country: 'Türkiye',
     story:
-      '[EDIT: one or two honest sentences on why you started this site, e.g. what problem you kept solving with prompts]',
+      'PromptVibe HQ was created to help people get more useful results from AI tools through clear prompts, practical examples and alternative approaches. Our goal is to make AI prompting easier to understand and apply in everyday tasks, creative projects and professional workflows.',
     models:
-      '[EDIT: the AI tools you actually use to check prompts, e.g. ChatGPT, Claude, Midjourney]',
+      'ChatGPT, Claude and Midjourney, where relevant to the published prompt.',
   },
 };
 

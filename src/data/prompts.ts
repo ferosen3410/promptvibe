@@ -816,6 +816,636 @@ All numbers are hypotheses to validate against competitor research and willingne
     published: '2026-10-18',
     reviewed: '2026-10-18',
   },
+  // 10 --------------------------------------------------------------------
+  {
+    slug: 'meeting-notes-action-items',
+    title: 'Meeting Notes to Action Items Prompt: Decisions, Owners and Deadlines',
+    metaTitle: 'Meeting Transcript to Action Items Prompt (Owners and Deadlines)',
+    category: 'analysis',
+    summary:
+      'Turn a raw transcript or messy notes into decisions, action items with owners and deadlines, and the questions nobody answered.',
+    intro: [
+      'Most meetings end with a feeling that everything was agreed and nothing was assigned. The useful output is not a summary of what was said, it is a short list of what was decided, who does what by when, and what is still unclear.',
+      'This prompt is strict about one thing: it may only record an owner or a deadline if the text actually states one. Otherwise it writes "not stated". That single rule turns vague agreement into a visible list of gaps you can chase.',
+    ],
+    prompt: `Act as a careful meeting secretary. Read the transcript or notes below and produce:
+
+1. Decisions made (one line each, with who proposed or agreed if stated).
+2. Action items as a table with the columns: Task, Owner, Deadline, Source quote (maximum 12 words).
+3. Open questions that were raised but not answered.
+4. Commitments that sounded firm but have no clear owner.
+
+Rules:
+- Only write an owner or a deadline if the text states it. Otherwise write "not stated".
+- Do not turn opinions or suggestions into decisions.
+- Keep names exactly as written.
+- Meeting type: {MEETING_TYPE}
+
+Transcript or notes:
+"""
+{NOTES}
+"""`,
+    variables: [
+      { name: '{MEETING_TYPE}', hint: 'For example weekly team sync, client call or project kickoff. It helps the model judge what counts as a decision.' },
+      { name: '{NOTES}', hint: 'The transcript or your rough notes. Speaker names make the owner column far more accurate.' },
+    ],
+    steps: [
+      'Paste the transcript or notes, keeping speaker names if you have them.',
+      'Read the "no clear owner" section first. It lists what is most likely to be forgotten.',
+      'Fill in every "not stated" owner and deadline yourself or ask the group.',
+      'Send the list to attendees within a day, while memories are fresh.',
+      'Keep the source quotes so anyone can check where an item came from.',
+    ],
+    example: {
+      input:
+        'Sara: We should move the launch to the 14th, the design review is not done. Tom: Agreed, I will update the roadmap by Friday. Sara: Someone needs to tell the support team. Tom: What about the pricing page? Nobody knew who owns it.',
+      output: `Decisions
+- Launch moves to the 14th (proposed by Sara, agreed by Tom).
+
+Action items
+| Task | Owner | Deadline | Source quote |
+| Update the roadmap | Tom | Friday | "I will update the roadmap by Friday" |
+| Inform the support team | not stated | not stated | "Someone needs to tell the support team" |
+
+Open questions
+- Who owns the pricing page?
+
+Commitments without a clear owner
+- Informing the support team
+- The pricing page`,
+    },
+    variations: [
+      { situation: 'Client call', change: 'Add a section for client requests and a separate one for promises we made, since they carry different risk.' },
+      { situation: 'Interview debrief', change: 'Replace action items with strengths, concerns and the evidence for each, quoted from the notes.' },
+      { situation: 'Handwritten or fragmentary notes', change: 'Ask the model to list its guesses about unclear items separately instead of filling them in.' },
+      { situation: 'Short follow-up email', change: 'Add "Write a five-line follow-up email for attendees based on the action items."' },
+    ],
+    mistakes: [
+      { title: 'Letting the model assign owners', detail: 'A guessed owner looks official and quietly sends work to the wrong person. Keep the "not stated" rule.' },
+      { title: 'Pasting a transcript with no names', detail: 'Without speakers, "I will do it" cannot be attached to anyone. Add names before you paste.' },
+      { title: 'Treating suggestions as decisions', detail: 'Phrases such as "maybe we should" are not agreements. Check the decisions list against what people actually agreed.' },
+      { title: 'Skipping the confidentiality check', detail: 'Meeting transcripts often hold sensitive details. Check your organization\'s rules before using an AI tool.' },
+    ],
+    faq: [
+      { q: 'Does it work with a transcript from a recording tool?', a: 'Yes, as long as the text is readable. Long transcripts are better processed in sections of about one agenda item each.' },
+      { q: 'Can it find who said what if names are missing?', a: 'No, and it should not guess. Add speaker names first or accept "not stated".' },
+      { q: 'How is this different from asking for a summary?', a: 'A summary describes the conversation. This asks for decisions, assignments and gaps, which are the parts people act on.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 11 --------------------------------------------------------------------
+  {
+    slug: 'landing-page-copy-review',
+    title: 'Landing Page Copy Review Prompt: Clarity, Proof and Calls to Action',
+    metaTitle: 'Landing Page Copy Review Prompt (Clarity, Proof and CTA)',
+    category: 'marketing',
+    summary:
+      'Get a structured critique of your landing page copy: what a stranger understands in five seconds, which claims lack proof and how to sharpen the headline.',
+    intro: [
+      'Most landing pages fail in the first screen. The visitor cannot tell what the product is, who it is for or why they should care, and no amount of clever wording lower down fixes that.',
+      'This prompt makes the model read your copy like a first-time visitor. It reports what it understood, points out claims that need evidence and offers headline alternatives, without writing fake testimonials or inventing numbers to fill gaps.',
+    ],
+    prompt: `Act as a conversion copy reviewer who has never heard of this product.
+
+Audience: {AUDIENCE}
+Goal of the page: {GOAL}
+
+Review the page copy below and answer:
+1. In two sentences, what do you think this product is, who is it for and what does it do? Base this only on the first screen of copy.
+2. Headline: what is unclear or generic? Offer 3 alternative headlines in different styles (direct, outcome-focused, question).
+3. List every claim that needs proof (numbers, "best", "fastest", "trusted by") and say what evidence would support it.
+4. List jargon or vague words a visitor might not understand.
+5. Review the main call to action: is it specific and low-risk?
+6. Suggest the order of sections that best fits the goal.
+
+Rules:
+- Do not invent testimonials, statistics or customer names.
+- If something is missing, say what is missing rather than making it up.
+
+Page copy:
+"""
+{PAGE_COPY}
+"""`,
+    variables: [
+      { name: '{AUDIENCE}', hint: 'The person you want to convert, described by situation rather than demographics.' },
+      { name: '{GOAL}', hint: 'One action, for example start a free trial or book a demo.' },
+      { name: '{PAGE_COPY}', hint: 'All the visible text in order, from the top of the page to the footer.' },
+    ],
+    steps: [
+      'Copy the visible text of your page in the order it appears.',
+      'Compare the model\'s two-sentence description with what you meant. Any gap is a clarity problem in your copy, not the model\'s.',
+      'Pick one headline alternative and rewrite it in your own words.',
+      'For every claim flagged as lacking proof, add real evidence or remove the claim.',
+      'Show the revised page to someone who does not know the product and ask them the same first question.',
+    ],
+    example: {
+      input:
+        'Audience: freelance designers. Goal: start a free trial. Copy: "Revolutionize your workflow. TimeNest is the best way to manage time. Trusted by thousands. Get started."',
+      output: `1. First impression: a time management tool of some kind. Unclear what it does differently or whether it targets designers.
+2. Headline problems: "Revolutionize your workflow" could describe any product. Alternatives: (direct) "Time tracking built for freelance designers"; (outcome) "Know what each project really earns you"; (question) "Which clients are actually worth your hours?"
+3. Claims needing proof: "the best way" (compared to what?); "Trusted by thousands" (show a real figure or named users, or remove it).
+4. Vague words: "workflow", "manage".
+5. Call to action: "Get started" does not say it is free or what happens next. Try "Start your free 14-day trial" only if that is true.
+6. Order: problem, how it works in three steps, real examples, pricing, then the call to action.`,
+    },
+    variations: [
+      { situation: 'Pricing page', change: 'Replace the goal with "help visitors choose a plan" and ask the model to review plan names and comparisons.' },
+      { situation: 'Email instead of a page', change: 'Ask for subject line critique and whether the first line makes sense without the rest.' },
+      { situation: 'Product with a technical audience', change: 'Tell the model the reader is an engineer and ask it to flag marketing language that reduces trust.' },
+      { situation: 'Before and after', change: 'Run it on the revised copy as well and compare the two-sentence descriptions.' },
+    ],
+    mistakes: [
+      { title: 'Pasting only the headline', detail: 'The prompt needs the whole page to judge flow, proof and the call to action.' },
+      { title: 'Describing the audience as everyone', detail: 'A vague audience produces vague advice. Name a specific situation.' },
+      { title: 'Letting the model write the proof', detail: 'If it invents a statistic and you publish it, that is your claim. Use only evidence you have.' },
+      { title: 'Taking every suggestion', detail: 'The review is input, not instructions. Keep what matches your product and your voice.' },
+    ],
+    faq: [
+      { q: 'Why does the model pretend not to know the product?', a: 'A real visitor does not either. If the copy only makes sense with context you hold in your head, the review will show it.' },
+      { q: 'Can I use this for a client\'s site?', a: 'Yes, but get permission before pasting a client\'s unpublished copy into a third-party tool.' },
+      { q: 'Does it replace testing?', a: 'No. It finds likely problems quickly. Real visitor behavior is still the best test.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 12 --------------------------------------------------------------------
+  {
+    slug: 'customer-interview-guide',
+    title: 'Customer Interview Guide Prompt: Questions That Reveal Real Behavior',
+    metaTitle: 'Customer Interview Guide Prompt (Questions About Real Behavior)',
+    category: 'marketing',
+    summary:
+      'Build an interview guide of open questions about what people actually did, with follow-up probes and a list of questions to avoid.',
+    intro: [
+      'Ask people whether they would use your idea and most will say yes to be polite. Ask what they did the last time they faced the problem, and you learn something real. The difference between those two questions is the difference between flattery and evidence.',
+      'This prompt writes an interview guide around past behavior, with probing follow-ups and a "do not ask" list. It will not give you answers about your market, only better questions to take to real people.',
+    ],
+    prompt: `Act as a user research specialist.
+
+I want to learn: {GOAL}
+I will interview: {SEGMENT}
+Stage of my idea: {STAGE}
+
+Create an interview guide with:
+1. A short, friendly opening script (under 60 words) that explains the purpose and says there are no wrong answers.
+2. 8 to 10 open questions about past behavior ("Tell me about the last time you...") rather than opinions about the future.
+3. For each question, one or two follow-up probes.
+4. Five questions I should avoid, with a one-line reason for each.
+5. A closing question that asks who else I should talk to.
+6. A simple note-taking template with columns for what they did, what they said and what surprised me.
+
+Rules:
+- Do not include questions that mention my solution before the last third of the interview.
+- No hypothetical questions such as "Would you pay for...".`,
+    variables: [
+      { name: '{GOAL}', hint: 'One thing you need to find out, for example how freelancers currently track unpaid invoices.' },
+      { name: '{SEGMENT}', hint: 'The kind of person you will talk to, described by situation.' },
+      { name: '{STAGE}', hint: 'For example "just an idea", "prototype" or "live product with a few customers".' },
+    ],
+    steps: [
+      'State one learning goal. A guide that tries to answer five questions answers none of them well.',
+      'Run the prompt and cut any question you would not actually want the answer to.',
+      'Rehearse the opening and first two questions out loud with a friend.',
+      'Take notes in the template during the interview, separating what people did from what they said they would do.',
+      'After five or six interviews, look for repeated behavior rather than repeated opinions.',
+    ],
+    example: {
+      input:
+        'Goal: understand how freelancers currently chase late invoices. Segment: freelance designers with at least three clients. Stage: just an idea.',
+      output: `Opening: "Thanks for making time. I am trying to understand how freelancers handle getting paid. There are no right answers, I am just curious about what really happens."
+
+Questions (sample)
+1. Tell me about the last time a client paid late. What happened?
+   Probes: What did you do first? How long did you wait before you acted?
+2. Walk me through how you send an invoice today, from start to finish.
+   Probes: Which tools do you use? Where does it get awkward?
+3. What did you do the last time you had to remind someone about a payment?
+   Probes: How did that feel? What would you change about it?
+
+Avoid
+- "Would you use an app that chases invoices for you?" (hypothetical, invites a polite yes)
+- "Do you find late payment frustrating?" (leads the answer)
+
+Closing: "Who else do you know who has dealt with this recently?"`,
+    },
+    variations: [
+      { situation: 'Existing customers', change: 'Ask about the moment they decided to buy and what they used before.' },
+      { situation: 'Churned users', change: 'Focus on what changed in their situation before they stopped using the product.' },
+      { situation: 'B2B buyers', change: 'Add questions about who else was involved in the decision and how budget was approved.' },
+      { situation: 'Short 15-minute calls', change: 'Ask for five questions only and one probe each.' },
+    ],
+    mistakes: [
+      { title: 'Pitching during the interview', detail: 'Once you describe your idea, people react to it instead of describing their life.' },
+      { title: 'Collecting compliments', detail: '"That sounds great" is not evidence. Look for what people did, paid for or tried before.' },
+      { title: 'Interviewing only friends', detail: 'Friends protect your feelings. Talk to people who match the segment and do not know you.' },
+      { title: 'Treating five interviews as proof', detail: 'A handful of interviews reveals patterns worth testing. It does not size a market.' },
+    ],
+    faq: [
+      { q: 'How many interviews should I do?', a: 'Enough to hear the same behavior repeated by different people. For many projects that starts to happen after five to eight.' },
+      { q: 'Do I need to record the calls?', a: 'Only with the person\'s clear permission. Notes are often enough.' },
+      { q: 'Can the model analyze my notes afterward?', a: 'It can help group them, but read the raw notes yourself so you notice what the model smooths over.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 13 --------------------------------------------------------------------
+  {
+    slug: 'unit-test-generator',
+    title: 'Unit Test Generator Prompt: Behaviors First, Then Tests',
+    metaTitle: 'Unit Test Generator Prompt (Behaviors, Edge Cases, Tests)',
+    category: 'development',
+    summary:
+      'Generate focused unit tests by listing a function\'s behaviors and edge cases first, then writing tests that check behavior instead of implementation.',
+    intro: [
+      'Asking a model to "write tests" often returns a long file that mirrors the implementation line by line. Such tests pass today and break on the next harmless refactor, so they protect nothing.',
+      'This prompt flips the order. It first lists what the function is supposed to do and where it could surprise you, asks questions about unclear behavior, and only then writes tests. The questions are often the most valuable part of the output.',
+    ],
+    prompt: `Act as a senior engineer who writes maintainable unit tests.
+
+Stack: {STACK}
+
+For the code below:
+1. List the behaviors it should have, as plain sentences.
+2. List edge cases and inputs that could surprise (empty values, boundaries, unusual characters, large values).
+3. Ask me about any behavior that is unclear or looks like a bug. Do not silently assume.
+4. Write unit tests that check behavior through the public interface, not internal details. Use clear test names that read as sentences.
+5. Note anything that should be tested at another level (integration, end to end).
+
+Rules:
+- Do not change the code under test. If you think it has a bug, say so.
+- No mocks unless the code has external dependencies.
+- Keep each test focused on one behavior.
+
+Code:
+{CODE}`,
+    variables: [
+      { name: '{STACK}', hint: 'Language and test framework, for example "TypeScript, Vitest".' },
+      { name: '{CODE}', hint: 'The function or module under test. One unit at a time works best.' },
+    ],
+    steps: [
+      'Paste a single function or small module with your language and test framework.',
+      'Read the list of behaviors. If it describes something you did not intend, you may have found a bug or a missing requirement.',
+      'Answer the model\'s questions, then ask it to update the tests.',
+      'Run the tests. Make sure at least one fails when you deliberately break the code.',
+      'Delete tests that only repeat each other. A smaller suite you trust is better.',
+    ],
+    example: {
+      input: `export function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}`,
+      output: `Behaviors: lowercases text; joins words with single hyphens; removes punctuation; trims leading and trailing separators.
+Edge cases: empty string; only punctuation; repeated spaces; accented or non-Latin letters.
+
+Question for you: non-ASCII letters are removed, so "Çay" becomes "ay". Is that intended, or should accented letters be transliterated?
+
+import { describe, it, expect } from 'vitest';
+import { slugify } from './slugify';
+
+describe('slugify', () => {
+  it('lowercases and joins words with hyphens', () => {
+    expect(slugify('Hello World')).toBe('hello-world');
+  });
+  it('removes punctuation', () => {
+    expect(slugify("What's new?")).toBe('what-s-new');
+  });
+  it('collapses repeated separators', () => {
+    expect(slugify('a --  b')).toBe('a-b');
+  });
+  it('trims leading and trailing separators', () => {
+    expect(slugify('  ...Hello...  ')).toBe('hello');
+  });
+  it('returns an empty string when nothing usable remains', () => {
+    expect(slugify('???')).toBe('');
+  });
+});
+
+Other levels: if slugs must be unique in a database, test that rule in an integration test.`,
+    },
+    variations: [
+      { situation: 'Legacy code without tests', change: 'Ask for characterization tests that record current behavior, and flag anything that looks wrong separately.' },
+      { situation: 'Function with network calls', change: 'Describe the dependencies and ask which ones to fake and which to leave real.' },
+      { situation: 'Property-based testing', change: 'Ask for properties that should always hold, for example "output never starts with a hyphen".' },
+      { situation: 'Test review', change: 'Paste existing tests and ask which behaviors they miss and which tests are redundant.' },
+    ],
+    mistakes: [
+      { title: 'Accepting tests you never ran', detail: 'Generated tests can contain wrong expectations. Run them and read every assertion.' },
+      { title: 'Never breaking the code', detail: 'A test that cannot fail is useless. Change the code on purpose and confirm a test catches it.' },
+      { title: 'Testing private details', detail: 'Tests tied to internals break on refactors. Stay with inputs and outputs.' },
+      { title: 'Skipping the questions', detail: 'The unclear behaviors the model lists are where bugs and missing requirements hide.' },
+    ],
+    faq: [
+      { q: 'Does this work for languages other than TypeScript?', a: 'Yes. Change the stack line and the model will adapt the style and framework.' },
+      { q: 'How many tests are enough?', a: 'Enough that you would be confident changing the function. Cover each behavior and each risky edge case once.' },
+      { q: 'Can the model run the tests?', a: 'Not in a normal chat. Run them in your own environment.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 14 --------------------------------------------------------------------
+  {
+    slug: 'blog-outline-from-your-notes',
+    title: 'Blog Post Outline Prompt That Keeps Your Own Experience',
+    metaTitle: 'Blog Post Outline Prompt From Your Own Notes (Keeps Your Voice)',
+    category: 'content',
+    summary:
+      'Turn your rough notes and real experience into a blog outline, with gaps marked for you to fill instead of invented by the model.',
+    intro: [
+      'Readers and search engines both reward pages that contain something a generic summary cannot: first-hand experience, specific details, real numbers, a point of view. A model asked to write about a topic from scratch has none of that and fills the page with safe, interchangeable statements.',
+      'This prompt starts from your notes instead. The model organizes what you already know, points out where the post is thin and marks gaps with a placeholder, so the finished article is built from your material rather than from the model\'s guesses.',
+    ],
+    prompt: `Act as an editor who helps writers shape their own material.
+
+Topic: {TOPIC}
+Reader: {READER}
+
+Below are my raw notes: things I did, saw, measured or learned. Using ONLY these notes:
+1. Propose 3 possible angles for a blog post, each with a one-sentence promise to the reader.
+2. After I choose one, create an outline with headings and, under each, the specific points from my notes that belong there.
+3. Mark every place where the post needs something I have not given you with [ADD: what is needed]. Examples: a number, a screenshot, a mistake I made, a counterexample.
+4. List claims in my notes that a skeptical reader might doubt and what would back them up.
+
+Rules:
+- Do not add facts, statistics or examples that are not in my notes.
+- Keep my wording for specific details.
+- If the notes are too thin for a useful post, say so and list what I should collect first.
+
+My notes:
+"""
+{NOTES}
+"""`,
+    variables: [
+      { name: '{TOPIC}', hint: 'The subject in a few words.' },
+      { name: '{READER}', hint: 'Who will read it and what they are trying to do.' },
+      { name: '{NOTES}', hint: 'Your own raw material: what you did, tried, measured, got wrong. Messy is fine.' },
+    ],
+    steps: [
+      'Spend ten minutes writing raw notes: what you did, what happened, what surprised you, any real numbers.',
+      'Run the prompt and choose the angle that matches what you can truly back up.',
+      'Collect whatever each [ADD] placeholder asks for, for example a screenshot or a measurement.',
+      'Write the post yourself from the outline, in your own words.',
+      'Remove any sentence that would fit equally well on any other site.',
+    ],
+    example: {
+      input:
+        'Topic: switching to a standing desk. Reader: office workers considering one. Notes: bought one in March, used it all day for two weeks, got sore feet, now alternate 45 minutes standing and sitting. Wasted money on a cheap anti-fatigue mat that curled up. Back pain is better but I changed my chair too.',
+      output: `Angles
+1. "What I got wrong in my first two weeks with a standing desk" (promise: avoid the mistakes I made).
+2. "How I settled on 45 minutes standing, 45 sitting" (promise: a schedule you can try).
+3. "Does a standing desk fix back pain? What I can and cannot say" (promise: an honest read of one person's result).
+
+Outline for angle 1
+- Why I bought one (your reasons) [ADD: what problem you hoped to solve]
+- The first two weeks: standing all day and sore feet
+- The mat that curled up [ADD: price and what you replaced it with]
+- What worked: alternating 45 and 45 [ADD: how you decided on 45 minutes]
+- Honest limits: back pain improved but I also changed chairs
+
+Claims a skeptic may doubt: "back pain is better" (changed chair at the same time; say so and describe how you judged it).`,
+    },
+    variations: [
+      { situation: 'How-to tutorial', change: 'Ask for numbered steps, with a [ADD] for any step you have not actually tested.' },
+      { situation: 'Product review', change: 'Add "Include a section on who should not buy this and what I disliked."' },
+      { situation: 'Case study', change: 'Ask for a before, what changed, after structure and mark every missing number.' },
+      { situation: 'Newsletter issue', change: 'Ask for a single idea, one story from my notes and one action for the reader.' },
+    ],
+    mistakes: [
+      { title: 'Giving too few notes', detail: 'A handful of vague lines gives the model nothing to organize. Write down specifics first.' },
+      { title: 'Letting the model fill the [ADD] gaps', detail: 'The gaps are where your real experience belongs. If you cannot fill one, cut that section.' },
+      { title: 'Publishing the outline as the post', detail: 'The outline is scaffolding. The writing and the details should come from you.' },
+      { title: 'Claiming more than you did', detail: 'If you tried something once, say once. Honest limits make a post more credible.' },
+    ],
+    faq: [
+      { q: 'What if I have no personal experience with the topic?', a: 'Then gather some first, or interview someone who does and use their words with permission. A post with no first-hand material is hard to make useful.' },
+      { q: 'Should I tell readers I used AI to structure the post?', a: 'There is no rule that you must for outlining help, but never claim tests or results that did not happen. Honest authorship matters more than the tools used.' },
+      { q: 'How long should the post be?', a: 'As long as the material justifies. A tight 700 words from real experience beats 2,000 words of filler.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 15 --------------------------------------------------------------------
+  {
+    slug: 'editing-for-clarity',
+    title: 'Clarity Editing Prompt That Preserves Your Voice',
+    metaTitle: 'Clarity Editing Prompt: Tighten Writing Without Losing Your Voice',
+    category: 'content',
+    summary:
+      'Edit a draft for clarity and flow while keeping your voice, with a list of every change and the claims you should double-check.',
+    intro: [
+      'Editing prompts have a bad habit: they rewrite everything into the same smooth, anonymous voice. The text gets shorter and more polished, and also less yours.',
+      'This prompt limits the model to the kinds of changes an editor would make: cutting filler, fixing unclear sentences and tightening structure. It must show what it changed and why, and it must flag factual claims rather than quietly improve them.',
+    ],
+    prompt: `Act as a careful line editor.
+
+Audience: {AUDIENCE}
+Tone to keep: {TONE}
+
+Edit the text below for clarity and flow.
+
+Rules:
+- Keep my voice, my word choices where they are clear and my structure unless it is confusing.
+- Do not add new facts, claims or examples.
+- Cut filler and repeated ideas. Split sentences longer than about 30 words when it helps.
+- Prefer concrete words over abstract ones, but only when the meaning stays the same.
+
+Return:
+1. The edited text.
+2. A list of the five most important changes and why you made them.
+3. Any sentence you were unsure about, with a question for me.
+4. Factual claims in the text that I should verify.
+
+Text:
+"""
+{TEXT}
+"""`,
+    variables: [
+      { name: '{AUDIENCE}', hint: 'Who is reading, for example beginners or busy managers.' },
+      { name: '{TONE}', hint: 'For example "friendly and direct" or "formal but warm".' },
+      { name: '{TEXT}', hint: 'Your draft. Edit sections of a few hundred words at a time for the best results.' },
+    ],
+    steps: [
+      'Paste a section of your draft, not a whole long article.',
+      'Compare the edit with your original side by side, not just the new version.',
+      'Read the change list and reject any change that makes the text sound less like you.',
+      'Check the flagged factual claims against real sources.',
+      'Read the final version out loud. Anything you stumble on needs another pass.',
+    ],
+    example: {
+      input:
+        'In order to be able to successfully improve the overall quality of your sleep, it is very important that you make sure to establish a consistent bedtime routine that you can follow every single night without fail, because research shows that routines are good for sleep.',
+      output: `Edited: To sleep better, follow the same bedtime routine every night. Routines help your body learn when to wind down.
+
+Main changes
+1. Replaced "In order to be able to successfully improve the overall quality of your sleep" with "To sleep better" (same meaning, fewer words).
+2. Cut "it is very important that you make sure to" (filler).
+3. Merged "every single night without fail" into "every night".
+4. Replaced "research shows that routines are good for sleep" with a plain statement of the effect.
+5. Split the sentence in two for easier reading.
+
+Question for you: the original says "research shows". Do you want to name a specific source? I removed the phrase because it makes a claim without one.
+To verify: that consistent routines improve sleep.`,
+    },
+    variations: [
+      { situation: 'Very light touch', change: 'Add "Change as little as possible; only fix errors and unclear sentences."' },
+      { situation: 'Non-native writer', change: 'Add "Keep vocabulary simple and explain any idiom you changed."' },
+      { situation: 'Shorter version', change: 'Ask for the edit plus a version cut by 30 percent, and compare what was lost.' },
+      { situation: 'Email', change: 'Ask for a clear first line stating the request and a polite close, without changing the facts.' },
+    ],
+    mistakes: [
+      { title: 'Accepting the whole edit at once', detail: 'Review changes individually. A polished sentence can still say something you did not mean.' },
+      { title: 'Editing before the structure works', detail: 'Line edits cannot fix a confusing argument. Fix the order of ideas first.' },
+      { title: 'Not naming the audience', detail: 'Clarity depends on the reader. Experts and beginners need different edits.' },
+      { title: 'Editing everything the same way', detail: 'Over-editing flattens style. Keep your quirks when they are intentional.' },
+    ],
+    faq: [
+      { q: 'Will the edited text sound like AI?', a: 'It can if you accept everything unchanged. Treat the edit as suggestions and keep your own phrasing where it is clear.' },
+      { q: 'Can it check grammar in other languages?', a: 'Yes, but have a fluent speaker review anything important.' },
+      { q: 'Why flag factual claims?', a: 'Editing for flow can make a weak claim sound confident. Flagging it reminds you to check it.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 16 --------------------------------------------------------------------
+  {
+    slug: 'product-photo-scene-prompt',
+    title: 'Product Photo Scene Prompt for AI Image Tools',
+    metaTitle: 'Product Photo Scene Prompt Template for AI Image Generators',
+    category: 'design',
+    summary:
+      'A template for clean product-style scenes with named slots for surface, light, camera and mood, plus space for text overlay.',
+    intro: [
+      'Product images are about control: a believable surface, soft and directional light, a clear subject and room for headlines. The usual failure is a prompt that crams in adjectives and gets a busy, shiny picture with no space to place text.',
+      'This template separates the parts of a product shot so you can adjust one at a time. It is meant for mood boards, concept art and backgrounds, not for pictures that represent a real product you sell.',
+    ],
+    prompt: `product photograph of {PRODUCT} on {SURFACE}, {LIGHTING}, shot from a {CAMERA}, {MOOD} atmosphere, simple composition with empty space on the {TEXT_SIDE} for text, minimal props, soft shadows --ar 4:5`,
+    variables: [
+      { name: '{PRODUCT}', hint: 'A generic product, for example "a ceramic coffee mug" or "a glass perfume bottle".' },
+      { name: '{SURFACE}', hint: 'For example "a light oak table", "grey concrete" or "folded linen".' },
+      { name: '{LIGHTING}', hint: 'For example "soft daylight from a window on the left".' },
+      { name: '{CAMERA}', hint: 'For example "45 degree angle", "straight-on view" or "high overhead angle".' },
+      { name: '{MOOD}', hint: 'One word or short phrase, such as calm, warm or crisp.' },
+      { name: '{TEXT_SIDE}', hint: 'Left, right, top or bottom, depending on where your headline will go.' },
+    ],
+    steps: [
+      'Choose a generic product so the result is a concept, not a copy of a real brand.',
+      'Fill each slot with one clear choice and generate a small batch.',
+      'Check the space for text first. If the subject fills the frame, change the camera or text side.',
+      'Change one slot at a time to learn what each one does.',
+      'Check your image tool\'s terms before using results commercially.',
+    ],
+    example: {
+      input:
+        'Product: a ceramic coffee mug. Surface: a light oak table. Lighting: soft daylight from a window on the left. Camera: 45 degree angle. Mood: calm. Text side: right.',
+      output: `product photograph of a ceramic coffee mug on a light oak table, soft daylight from a window on the left, shot from a 45 degree angle, calm atmosphere, simple composition with empty space on the right for text, minimal props, soft shadows --ar 4:5
+
+What to look for: the mug on the left third, a plain area on the right, gentle shadow falling away from the window. If the background is cluttered, add "plain wall background".`,
+    },
+    variations: [
+      { situation: 'Dark, premium feel', change: 'Use a dark stone surface, "single low light with a soft edge highlight" and a "luxurious" mood.' },
+      { situation: 'Food photography', change: 'Replace the product with the dish and add "natural steam" or "fresh ingredients nearby" if needed.' },
+      { situation: 'Flat lay', change: 'Use an overhead camera and describe three or four props arranged neatly around the subject.' },
+      { situation: 'Social media banner', change: 'Change the ratio to 16:9 and the text side to left or right.' },
+    ],
+    mistakes: [
+      { title: 'Using generated images to misrepresent a real product', detail: 'If you sell something, customers must see the actual item. Use real photos for listings.' },
+      { title: 'Naming real brands', detail: 'Brand names and logos in prompts raise legal problems and rarely render correctly.' },
+      { title: 'Filling the frame', detail: 'Without empty space you cannot add text later. Ask for it explicitly.' },
+      { title: 'Too many props', detail: 'Extra objects pull focus and create odd details. Keep it minimal.' },
+    ],
+    faq: [
+      { q: 'Does this work in every image generator?', a: 'The structure does. The --ar parameter is specific to some tools, so use your tool\'s own aspect ratio setting.' },
+      { q: 'Can I use the results in ads?', a: 'Check the tool\'s license and the advertising rules for your market, especially if the image could mislead.' },
+      { q: 'How do I keep a consistent style across images?', a: 'Reuse the same surface, lighting and mood slots and change only the product.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
+
+  // 17 --------------------------------------------------------------------
+  {
+    slug: 'objection-handling-responses',
+    title: 'Sales Objection Handling Prompt: Honest Responses That Keep Trust',
+    metaTitle: 'Sales Objection Handling Prompt (Honest, Non-Pushy Responses)',
+    category: 'sales',
+    summary:
+      'Draft three different responses to a sales objection, plus what not to say and when to let the deal go.',
+    intro: [
+      'Objection scripts usually fail because they try to win the argument. A buyer who says "too expensive" is rarely asking for a clever rebuttal. They are telling you something about value, timing or risk, and the best response finds out which.',
+      'This prompt generates three approaches, a question that clarifies, a fact that helps and a reframe, and then lists what to avoid. It also asks when the right move is to step back, because not every deal is a good one.',
+    ],
+    prompt: `Act as an experienced, ethical sales coach.
+
+Product: {PRODUCT}
+Buyer: {BUYER}
+Objection I heard: "{OBJECTION}"
+
+Give me:
+1. What this objection might really mean (list 3 possible underlying concerns).
+2. Three response options, each under 60 words, using different approaches:
+   a) Acknowledge and ask a clarifying question.
+   b) Offer a relevant fact or example that I can honestly back up.
+   c) Reframe the concern without dismissing it.
+3. Three things I should avoid saying in this situation.
+4. Signs that this buyer is not a good fit and I should step back.
+
+Rules:
+- No pressure tactics, false urgency or invented claims.
+- Do not criticize competitors without facts I provide.
+- If a response needs a fact I have not given you, mark it with [FACT NEEDED].`,
+    variables: [
+      { name: '{PRODUCT}', hint: 'What you sell, in one sentence.' },
+      { name: '{BUYER}', hint: 'Role and situation, for example operations manager at a 40-person company.' },
+      { name: '{OBJECTION}', hint: 'The buyer\'s exact words, as close as you remember.' },
+    ],
+    steps: [
+      'Write down the objection in the buyer\'s own words.',
+      'Read the three possible meanings and decide which one you need to find out.',
+      'Pick the response that fits the buyer and rewrite it in your own words.',
+      'Replace every [FACT NEEDED] with something true you can show, or drop that response.',
+      'Afterward, note what worked so you improve the prompt for next time.',
+    ],
+    example: {
+      input:
+        'Product: invoice matching software for small finance teams. Buyer: finance manager at a 60-person company. Objection: "This is too expensive for us."',
+      output: `Possible meanings: (1) the price is above budget; (2) they do not yet see enough value to justify it; (3) they are comparing it with doing the work by hand.
+
+a) Clarify: "That is fair. Is it the price itself, or not being sure yet how much time it would save your team? Knowing which helps me suggest the right next step."
+b) Fact: "A couple of our smaller customers started with one monthly close to see the effect before committing. [FACT NEEDED: only use this if it is true.]"
+c) Reframe: "If we looked at it as hours per month rather than a subscription, what does the manual matching cost you today?"
+
+Avoid: "You cannot afford not to have this." / "The price goes up tomorrow." (false urgency) / "Our competitor is much worse." (unsupported)
+Step back if: there is no budget at all for this problem, or the pain is minor and no one owns it.`,
+    },
+    variations: [
+      { situation: '"We use a competitor"', change: 'Ask for questions that find out what they like and what they would change, without criticizing the competitor.' },
+      { situation: '"Not now"', change: 'Ask for a response that confirms timing, sets a specific follow-up and leaves the door open.' },
+      { situation: 'Written reply', change: 'Ask for an email version under 90 words with one question at the end.' },
+      { situation: 'Practice session', change: 'Ask the model to play the buyer so you can rehearse and then give feedback on your answers.' },
+    ],
+    mistakes: [
+      { title: 'Rebutting instead of listening', detail: 'Rushing to counter the objection hides what the buyer was really saying. Ask first.' },
+      { title: 'Using claims you cannot support', detail: 'If you cannot prove it, do not say it. A false claim costs more than a lost sale.' },
+      { title: 'Using the same script for everyone', detail: 'The buyer\'s situation changes what the objection means. Adjust the response.' },
+      { title: 'Never walking away', detail: 'Chasing poor-fit buyers wastes time. Recognizing a bad fit is part of good selling.' },
+    ],
+    faq: [
+      { q: 'Should I memorize these responses?', a: 'Use them as practice material, then say things in your own words. A script read aloud sounds like one.' },
+      { q: 'What if the objection is just a polite no?', a: 'The clarifying question usually reveals that. Accept a clear no gracefully.' },
+      { q: 'Can I use it for B2C?', a: 'Yes. Replace the buyer description and keep the same honest approach.' },
+    ],
+    published: '2026-10-18',
+    reviewed: '2026-10-18',
+  },
 ];
 
 // Yardımcı fonksiyonlar ---------------------------------------------------

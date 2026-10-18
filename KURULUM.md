@@ -65,7 +65,9 @@ gerçekten çalıştırıp çıkan sonuçla değiştirmeniz sayfayı hem dürüs
 
 ## AdSense için sonraki adımlar
 
-1. En az 20-30 sayfa içerik olana kadar bekleyin (şu an 9 prompt + sayfalar).
+1. En az 20-30 sayfa içerik olana kadar bekleyin (şu an 17 prompt + sayfalar).
+   Kendi eklediğiniz her prompt için gerçekten çalıştırıp aldığınız çıktıyı
+   `example` alanına koyun; "denendi" diyen her cümle doğru olmalı.
 2. Search Console'a `https://www.promptvibehq.com/sitemap-index.xml` adresini gönderin.
 3. AdSense'e başvururken verilen kodu `site.ts` içindeki `adsensePublisherId` alanına
    (ör. `ca-pub-1234567890123456`) yazın; kod otomatik olarak `<head>` içine eklenir.
