@@ -1,163 +1,152 @@
 ---
 export function getStaticPaths() {
   return [
-    {
-      params: { slug: 'complex-document-summarization' },
-      props: {
-        title: "Complex Document Summarization Prompt for AI",
-        category: "Engineering & Analysis",
-        description: "Transform lengthy corporate reports, whitepapers, and dense research documents into structured 5-bullet executive summaries.",
-        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
-        promptText: "Act as a senior business analyst. Analyze the provided text below. Extract core insights, identify strategic risks, highlight key quantitative metrics, and construct a concise 5-bullet executive summary with actionable recommendations:",
-        instructions: "Paste this prompt into ChatGPT Plus (GPT-4o) or Claude 3.5 Sonnet followed by your document text or attached PDF.",
-        articleTitle: "Why Executive Document Summarization Matters in Modern Workflows",
-        articleBody: [
-          "Processing lengthy legal contracts, corporate quarterly reports, and technical documentation consumes dozens of hours every week for analysts and managers. Standard AI summaries often suffer from surface-level glossing, missing crucial financial metrics or operational risks hidden within fine print.",
-          "This engineered prompt forces Large Language Models (LLMs) to adopt the mindset of a seasoned management consultant. By enforcing a structured 5-bullet hierarchy, it ensures that quantitative data points and strategic vulnerability factors are prioritized over generic fluff.",
-          "For optimal results, ensure your raw input material contains clear section headings or context markers. If you are summarizing technical specifications, you can easily adapt the prompt by specifying your industry domain (e.g., 'Act as a principal software architect') before running the analysis."
-        ]
-      }
-    },
-    {
-      params: { slug: 'cold-email-sales-sequence' },
-      props: {
-        title: "High-Converting B2B Cold Email Sequence Prompt",
-        category: "Marketing & Sales",
-        description: "Generate a personalized 3-step B2B cold outreach email series tailored for SaaS products and high-ticket service offers.",
-        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80",
-        promptText: "Act as an elite direct-response copywriter. Write a 3-step personalized B2B cold email sequence targeting C-level executives for a SaaS solution. Keep each message under 110 words, focus on acute pain points, avoid sales clichés, and include a frictionless call-to-action:",
-        instructions: "Replace target role and industry details in your AI workspace before generating responses.",
-        articleTitle: "Crafting High-Response B2B Sales Outreach with Artificial Intelligence",
-        articleBody: [
-          "Cold email response rates have dramatically declined due to automated spam filters and generic AI template blasts. Decision-makers receive dozens of pitch decks weekly, making brevity and acute personalization the most valuable currency in modern business development.",
-          "This outreach prompt is designed around proven direct-response frameworks. Instead of pitching product features upfront, it prompts the AI model to articulate a single core problem and present a low-friction question that encourages genuine dialog rather than hard resistance.",
-          "When utilizing this prompt in campaign platforms, make sure to pair the output with accurate prospect data merge tags (such as prospect name and company) to ensure maximum deliverability and authentic resonance."
-        ]
-      }
-    },
-    {
-      params: { slug: 'code-refactoring-optimization' },
-      props: {
-        title: "Clean Code Refactoring & Optimization Prompt",
-        category: "Software Development",
-        description: "Refactor legacy codebase snippets using modern TypeScript design patterns, performance optimization, and clean code principles.",
-        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-        promptText: "Assume the role of a principal software engineer. Review the attached code snippet, identify memory leaks and performance bottlenecks, apply clean code principles, and rewrite it using modern TypeScript best practices with detailed inline comments:",
-        instructions: "Provide your source code directly below the prompt inside triple backticks (```).",
-        articleTitle: "Accelerating Code Maintenance and Debt Reduction via AI",
-        articleBody: [
-          "Technical debt accumulates quickly in fast-paced software startups. Over time, unoptimized nested loops, redundant state transformations, and missing error handlers degrade application stability and developer velocity.",
-          "Using AI for automated code review requires guiding the model toward specific architectural patterns. This refactoring prompt instructs the AI to evaluate algorithmic time complexity (Big-O notation) and modern typing standards rather than making simple cosmetic syntax edits.",
-          "Always verify AI-generated refactored code with unit testing and integration suites in local staging environments prior to production deployment."
-        ]
-      }
-    },
-    {
-      params: { slug: 'photorealistic-midjourney-portrait' },
-      props: {
-        title: "Photorealistic Studio Portrait Midjourney Prompt",
-        category: "Design & Midjourney",
-        description: "Engineered prompt parameters for producing hyperrealistic 8K studio photography and portrait images with Midjourney v6.",
-        image: "[https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80)",
-        promptText: "A realistic portrait photo of a 30-year-old architect, cinematic lighting, 85mm lens, f/1.8, highly detailed skin texture, subtle background bokeh, professional studio lighting, hyperrealistic, 8k resolution --ar 16:9 --v 6.0",
-        instructions: "Copy directly into Midjourney Discord (/imagine) or Midjourney Web alpha generator.",
-        articleTitle: "Mastering Photographic Camera Parameters in Midjourney v6",
-        articleBody: [
-          "AI generative image models often produce plastic-looking skin or unnatural uncanny studio lighting when given simple natural language descriptions. Achieving true photographic realism requires specifying optical parameters such as focal length, aperture values, and specific lighting rigs.",
-          "By specifying an '85mm lens' at 'f/1.8', this prompt instructs the rendering engine to simulate genuine depth of field and optical compression, creating professional portrait isolation from background elements.",
-          "You can customize subject characteristics such as age, profession, attire, or color grade while maintaining the lens parameters to achieve consistent visual quality across an entire campaign."
-        ]
-      }
-    },
-    {
-      params: { slug: 'seo-content-pillar-generator' },
-      props: {
-        title: "SEO Content Pillar & Cluster Strategy Prompt",
-        category: "Content & SEO",
-        description: "Build comprehensive topic cluster maps and content pillar strategies designed to dominate Google search engine rankings.",
-        image: "[https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80)",
-        promptText: "Act as an enterprise SEO director. Create a detailed topic cluster and pillar page content architecture for the niche '[Niche]'. List 1 primary pillar topic, 6 supporting sub-cluster articles, target search intent, and suggested H2 headings for each:",
-        instructions: "Insert your target niche or industry keyword in the brackets before executing.",
-        articleTitle: "Scaling Organic Traffic with Semantic Topic Clusters",
-        articleBody: [
-          "Google's core ranking algorithms heavily reward topical authority rather than isolated keyword stuffing. Creating interconnected topic clusters signals to search engine crawlers that your website possesses comprehensive domain expertise.",
-          "This prompt establishes an enterprise-grade content hierarchy, ensuring internal linking strategies flow seamlessly between broad pillar guides and niche long-tail articles.",
-          "Use the generated output to map out your editorial content calendar for the upcoming quarter to build steady organic compounding traffic."
-        ]
-      }
-    },
-    {
-      params: { slug: 'sql-query-performance-tuner' },
-      props: {
-        title: "Advanced SQL Query Performance Tuner Prompt",
-        category: "Software Development",
-        description: "Optimize slow-running database queries, analyze execution plans, and suggest proper indexing strategies.",
-        image: "[https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80)",
-        promptText: "Act as a senior database administrator (DBA). Review the following SQL query, identify bottlenecks causing table scans, optimize the JOIN structure, and recommend proper indexing strategies for PostgreSQL:",
-        instructions: "Paste your database schema and slow query below the prompt text.",
-        articleTitle: "Eliminating Database Bottlenecks Through Smart Query Tuning",
-        articleBody: [
-          "Database performance degradation is one of the primary catalysts for application scaling failures. Inefficient JOIN operations and unindexed foreign keys can quickly turn milliseconds of response time into sluggish multi-second delays.",
-          "This prompt directs the AI to evaluate query execution structures, recommend composite indexes, and rewrite subqueries into high-performance CTEs (Common Table Expressions) where appropriate.",
-          "Always test query optimizations on staging databases with realistic production data volumes before deploying modifications to live environments."
-        ]
-      }
-    },
-    {
-      params: { slug: 'react-component-clean-architecture' },
-      props: {
-        title: "React Functional Component Clean Architecture Prompt",
-        category: "Software Development",
-        description: "Design modular, high-performance React components using custom hooks, TypeScript types, and accessibility best practices.",
-        image: "[https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80)",
-        promptText: "Act as a principal frontend architect. Write a production-ready React component using TypeScript, Tailwind CSS, and custom hooks. Implement proper memoization, accessibility (WAI-ARIA roles), and robust prop typing:",
-        instructions: "Specify your UI component requirements (e.g., 'Data table with sorting and filtering') after the prompt.",
-        articleTitle: "Scaling Frontend Applications with Clean Component Architecture",
-        articleBody: [
-          "As frontend web applications expand, unorganized React components lead to massive bundle sizes, prop-drilling headaches, and sluggish re-renders. Enforcing strict component boundaries and extracting logic into custom hooks is vital for maintainability.",
-          "This prompt guides the AI to structure components following atomic design principles while integrating strict TypeScript interfaces and accessibility attributes out of the box.",
-          "Review the generated hook segregation to ensure state management remains localized and efficient across complex component trees."
-        ]
-      }
-    },
-    {
-      params: { slug: 'youtube-viral-video-hook-script' },
-      props: {
-        title: "YouTube Viral Video Hook & Script Structure Prompt",
-        category: "Content & Media",
-        description: "Engineer high-retention video intros and structured YouTube scripts designed to maximize audience retention metrics.",
-        image: "[https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80)",
-        promptText: "Act as an expert YouTube growth strategist. Create a 30-second high-retention video hook and complete structured script outline for a video titled '[Video Title]'. Focus on emotional triggers, open loops, and fast-paced pacing:",
-        instructions: "Input your target video title or content concept in brackets before running.",
-        articleTitle: "Mastering Audience Retention Through Strategic Script Engineering",
-        articleBody: [
-          "The first 30 seconds of any digital video determine whether viewers stay or click away. YouTube's recommendation algorithm heavily weights audience retention curves when determining organic reach and impression distribution.",
-          "This prompt avoids slow introductions or channel branding fluff, forcing the AI model to construct an instant 'open loop' psychological hook followed by rapid pacing frameworks.",
-          "Pair the generated script sections with dynamic B-roll suggestions to maintain sustained visual engagement throughout the core content delivery."
-        ]
-      }
-    },
-    {
-      params: { slug: 'saas-pricing-strategy-generator' },
-      props: {
-        title: "SaaS Tiered Pricing & Packaging Strategy Prompt",
-        category: "Business & Growth",
-        description: "Design value-based tiered pricing models and packaging frameworks for B2B and consumer SaaS software products.",
-        image: "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80)",
-        promptText: "Act as a veteran SaaS pricing strategist. Design a 3-tier value-based pricing and feature packaging model for a software product solving '[Problem/Niche]'. Include recommended monthly price points, usage metrics, and upgrade triggers:",
-        instructions: "Describe your core software solution briefly after filling in the niche details.",
-        articleTitle: "Optimizing SaaS Monetization Through Value-Based Packaging",
-        articleBody: [
-          "Pricing is often the most neglected growth lever for early-stage software startups. Relying on guesswork or arbitrary flat-rate pricing leaves substantial recurring revenue on the table and misaligns product value from customer willingness to pay.",
-          "This prompt evaluates feature gating strategies based on true usage metrics (such as active seats, data throughput, or API calls) rather than arbitrary artificial limitations.",
-          "Test the resulting pricing tiers against your target customer segments during user discovery calls to validate psychological price anchoring before public launch."
-        ]
-      }
-    }
+    { params: { slug: 'complex-document-summarization' } },
+    { params: { slug: 'cold-email-sales-sequence' } },
+    { params: { slug: 'code-refactoring-optimization' } },
+    { params: { slug: 'photorealistic-midjourney-portrait' } },
+    { params: { slug: 'seo-content-pillar-generator' } },
+    { params: { slug: 'sql-query-performance-tuner' } },
+    { params: { slug: 'react-component-clean-architecture' } },
+    { params: { slug: 'youtube-viral-video-hook-script' } },
+    { params: { slug: 'saas-pricing-strategy-generator' } }
   ];
 }
 
-const { title, category, description, image, promptText, instructions, articleTitle, articleBody } = Astro.props;
+const { slug } = Astro.params;
+
+// Her slug için görselleri ve içerikleri doğrudan burada eşleştiriyoruz (Sıfır hata garantili!)
+const contentMap = {
+  'complex-document-summarization': {
+    title: "Complex Document Summarization Prompt for AI",
+    category: "Engineering & Analysis",
+    description: "Transform lengthy corporate reports, whitepapers, and dense research documents into structured 5-bullet executive summaries.",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
+    promptText: "Act as a senior business analyst. Analyze the provided text below. Extract core insights, identify strategic risks, highlight key quantitative metrics, and construct a concise 5-bullet executive summary with actionable recommendations:",
+    instructions: "Paste this prompt into ChatGPT Plus (GPT-4o) or Claude 3.5 Sonnet followed by your document text or attached PDF.",
+    articleTitle: "Why Executive Document Summarization Matters in Modern Workflows",
+    articleBody: [
+      "Processing lengthy legal contracts, corporate quarterly reports, and technical documentation consumes dozens of hours every week for analysts and managers. Standard AI summaries often suffer from surface-level glossing, missing crucial financial metrics or operational risks hidden within fine print.",
+      "This engineered prompt forces Large Language Models (LLMs) to adopt the mindset of a seasoned management consultant. By enforcing a structured 5-bullet hierarchy, it ensures that quantitative data points and strategic vulnerability factors are prioritized over generic fluff.",
+      "For optimal results, ensure your raw input material contains clear section headings or context markers. If you are summarizing technical specifications, you can easily adapt the prompt by specifying your industry domain (e.g., 'Act as a principal software architect') before running the analysis."
+    ]
+  },
+  'cold-email-sales-sequence': {
+    title: "High-Converting B2B Cold Email Sequence Prompt",
+    category: "Marketing & Sales",
+    description: "Generate a personalized 3-step B2B cold outreach email series tailored for SaaS products and high-ticket service offers.",
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80",
+    promptText: "Act as an elite direct-response copywriter. Write a 3-step personalized B2B cold email sequence targeting C-level executives for a SaaS solution. Keep each message under 110 words, focus on acute pain points, avoid sales clichés, and include a frictionless call-to-action:",
+    instructions: "Replace target role and industry details in your AI workspace before generating responses.",
+    articleTitle: "Crafting High-Response B2B Sales Outreach with Artificial Intelligence",
+    articleBody: [
+      "Cold email response rates have dramatically declined due to automated spam filters and generic AI template blasts. Decision-makers receive dozens of pitch decks weekly, making brevity and acute personalization the most valuable currency in modern business development.",
+      "This outreach prompt is designed around proven direct-response frameworks. Instead of pitching product features upfront, it prompts the AI model to articulate a single core problem and present a low-friction question that encourages genuine dialog rather than hard resistance.",
+      "When utilizing this prompt in campaign platforms, make sure to pair the output with accurate prospect data merge tags (such as prospect name and company) to ensure maximum deliverability and authentic resonance."
+    ]
+  },
+  'code-refactoring-optimization': {
+    title: "Clean Code Refactoring & Optimization Prompt",
+    category: "Software Development",
+    description: "Refactor legacy codebase snippets using modern TypeScript design patterns, performance optimization, and clean code principles.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+    promptText: "Assume the role of a principal software engineer. Review the attached code snippet, identify memory leaks and performance bottlenecks, apply clean code principles, and rewrite it using modern TypeScript best practices with detailed inline comments:",
+    instructions: "Provide your source code directly below the prompt inside triple backticks (```).",
+    articleTitle: "Accelerating Code Maintenance and Debt Reduction via AI",
+    articleBody: [
+      "Technical debt accumulates quickly in fast-paced software startups. Over time, unoptimized nested loops, redundant state transformations, and missing error handlers degrade application stability and developer velocity.",
+      "Using AI for automated code review requires guiding the model toward specific architectural patterns. This refactoring prompt instructs the AI to evaluate algorithmic time complexity (Big-O notation) and modern typing standards rather than making simple cosmetic syntax edits.",
+      "Always verify AI-generated refactored code with unit testing and integration suites in local staging environments prior to production deployment."
+    ]
+  },
+  'photorealistic-midjourney-portrait': {
+    title: "Photorealistic Studio Portrait Midjourney Prompt",
+    category: "Design & Midjourney",
+    description: "Engineered prompt parameters for producing hyperrealistic 8K studio photography and portrait images with Midjourney v6.",
+    image: "[https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80)",
+    promptText: "A realistic portrait photo of a 30-year-old architect, cinematic lighting, 85mm lens, f/1.8, highly detailed skin texture, subtle background bokeh, professional studio lighting, hyperrealistic, 8k resolution --ar 16:9 --v 6.0",
+    instructions: "Copy directly into Midjourney Discord (/imagine) or Midjourney Web alpha generator.",
+    articleTitle: "Mastering Photographic Camera Parameters in Midjourney v6",
+    articleBody: [
+      "AI generative image models often produce plastic-looking skin or unnatural uncanny studio lighting when given simple natural language descriptions. Achieving true photographic realism requires specifying optical parameters such as focal length, aperture values, and specific lighting rigs.",
+      "By specifying an '85mm lens' at 'f/1.8', this prompt instructs the rendering engine to simulate genuine depth of field and optical compression, creating professional portrait isolation from background elements.",
+      "You can customize subject characteristics such as age, profession, attire, or color grade while maintaining the lens parameters to achieve consistent visual quality across an entire campaign."
+    ]
+  },
+  'seo-content-pillar-generator': {
+    title: "SEO Content Pillar & Cluster Strategy Prompt",
+    category: "Content & SEO",
+    description: "Build comprehensive topic cluster maps and content pillar strategies designed to dominate Google search engine rankings.",
+    image: "[https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80)",
+    promptText: "Act as an enterprise SEO director. Create a detailed topic cluster and pillar page content architecture for the niche '[Niche]'. List 1 primary pillar topic, 6 supporting sub-cluster articles, target search intent, and suggested H2 headings for each:",
+    instructions: "Insert your target niche or industry keyword in the brackets before executing.",
+    articleTitle: "Scaling Organic Traffic with Semantic Topic Clusters",
+    articleBody: [
+      "Google's core ranking algorithms heavily reward topical authority rather than isolated keyword stuffing. Creating interconnected topic clusters signals to search engine crawlers that your website possesses comprehensive domain expertise.",
+      "This prompt establishes an enterprise-grade content hierarchy, ensuring internal linking strategies flow seamlessly between broad pillar guides and niche long-tail articles.",
+      "Use the generated output to map out your editorial content calendar for the upcoming quarter to build steady organic compounding traffic."
+    ]
+  },
+  'sql-query-performance-tuner': {
+    title: "Advanced SQL Query Performance Tuner Prompt",
+    category: "Software Development",
+    description: "Optimize slow-running database queries, analyze execution plans, and suggest proper indexing strategies.",
+    image: "[https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80)",
+    promptText: "Act as a senior database administrator (DBA). Review the following SQL query, identify bottlenecks causing table scans, optimize the JOIN structure, and recommend proper indexing strategies for PostgreSQL:",
+    instructions: "Paste your database schema and slow query below the prompt text.",
+    articleTitle: "Eliminating Database Bottlenecks Through Smart Query Tuning",
+    articleBody: [
+      "Database performance degradation is one of the primary catalysts for application scaling failures. Inefficient JOIN operations and unindexed foreign keys can quickly turn milliseconds of response time into sluggish multi-second delays.",
+      "This prompt directs the AI to evaluate query execution structures, recommend composite indexes, and rewrite subqueries into high-performance CTEs (Common Table Expressions) where appropriate.",
+      "Always test query optimizations on staging databases with realistic production data volumes before deploying modifications to live environments."
+    ]
+  },
+  'react-component-clean-architecture': {
+    title: "React Functional Component Clean Architecture Prompt",
+    category: "Software Development",
+    description: "Design modular, high-performance React components using custom hooks, TypeScript types, and accessibility best practices.",
+    image: "[https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80)",
+    promptText: "Act as a principal frontend architect. Write a production-ready React component using TypeScript, Tailwind CSS, and custom hooks. Implement proper memoization, accessibility (WAI-ARIA roles), and robust prop typing:",
+    instructions: "Specify your UI component requirements (e.g., 'Data table with sorting and filtering') after the prompt.",
+    articleTitle: "Scaling Frontend Applications with Clean Component Architecture",
+    articleBody: [
+      "As frontend web applications expand, unorganized React components lead to massive bundle sizes, prop-drilling headaches, and sluggish re-renders. Enforcing strict component boundaries and extracting logic into custom hooks is vital for maintainability.",
+      "This prompt guides the AI to structure components following atomic design principles while integrating strict TypeScript interfaces and accessibility attributes out of the box.",
+      "Review the generated hook segregation to ensure state management remains localized and efficient across complex component trees."
+    ]
+  },
+  'youtube-viral-video-hook-script': {
+    title: "YouTube Viral Video Hook & Script Structure Prompt",
+    category: "Content & Media",
+    description: "Engineer high-retention video intros and structured YouTube scripts designed to maximize audience retention metrics.",
+    image: "[https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80)",
+    promptText: "Act as an expert YouTube growth strategist. Create a 30-second high-retention video hook and complete structured script outline for a video titled '[Video Title]'. Focus on emotional triggers, open loops, and fast-paced pacing:",
+    instructions: "Input your target video title or content concept in brackets before running.",
+    articleTitle: "Mastering Audience Retention Through Strategic Script Engineering",
+    articleBody: [
+      "The first 30 seconds of any digital video determine whether viewers stay or click away. YouTube's recommendation algorithm heavily weights audience retention curves when determining organic reach and impression distribution.",
+      "This prompt avoids slow introductions or channel branding fluff, forcing the AI model to construct an instant 'open loop' psychological hook followed by rapid pacing frameworks.",
+      "Pair the generated script sections with dynamic B-roll suggestions to maintain sustained visual engagement throughout the core content delivery."
+    ]
+  },
+  'saas-pricing-strategy-generator': {
+    title: "SaaS Tiered Pricing & Packaging Strategy Prompt",
+    category: "Business & Growth",
+    description: "Design value-based tiered pricing models and packaging frameworks for B2B and consumer SaaS software products.",
+    image: "[https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80)",
+    promptText: "Act as a veteran SaaS pricing strategist. Design a 3-tier value-based pricing and feature packaging model for a software product solving '[Problem/Niche]'. Include recommended monthly price points, usage metrics, and upgrade triggers:",
+    instructions: "Describe your core software solution briefly after filling in the niche details.",
+    articleTitle: "Optimizing SaaS Monetization Through Value-Based Packaging",
+    articleBody: [
+      "Pricing is often the most neglected growth lever for early-stage software startups. Relying on guesswork or arbitrary flat-rate pricing leaves substantial recurring revenue on the table and misaligns product value from customer willingness to pay.",
+      "This prompt evaluates feature gating strategies based on true usage metrics (such as active seats, data throughput, or API calls) rather than arbitrary artificial limitations.",
+      "Test the resulting pricing tiers against your target customer segments during user discovery calls to validate psychological price anchoring before public launch."
+    ]
+  }
+};
+
+const currentData = contentMap[slug] || contentMap['complex-document-summarization'];
+const { title, category, description, image, promptText, instructions, articleTitle, articleBody } = currentData;
 ---
 
 <!DOCTYPE html>
