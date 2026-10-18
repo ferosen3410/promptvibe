@@ -68,6 +68,91 @@ export function getStaticPaths() {
           "You can customize subject characteristics such as age, profession, attire, or color grade while maintaining the lens parameters to achieve consistent visual quality across an entire campaign."
         ]
       }
+    },
+    {
+      params: { slug: 'seo-content-pillar-generator' },
+      props: {
+        title: "SEO Content Pillar & Cluster Strategy Prompt",
+        category: "Content & SEO",
+        description: "Build comprehensive topic cluster maps and content pillar strategies designed to dominate Google search engine rankings.",
+        image: "[https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80)",
+        promptText: "Act as an enterprise SEO director. Create a detailed topic cluster and pillar page content architecture for the niche '[Niche]'. List 1 primary pillar topic, 6 supporting sub-cluster articles, target search intent, and suggested H2 headings for each:",
+        instructions: "Insert your target niche or industry keyword in the brackets before executing.",
+        articleTitle: "Scaling Organic Traffic with Semantic Topic Clusters",
+        articleBody: [
+          "Google's core ranking algorithms heavily reward topical authority rather than isolated keyword stuffing. Creating interconnected topic clusters signals to search engine crawlers that your website possesses comprehensive domain expertise.",
+          "This prompt establishes an enterprise-grade content hierarchy, ensuring internal linking strategies flow seamlessly between broad pillar guides and niche long-tail articles.",
+          "Use the generated output to map out your editorial content calendar for the upcoming quarter to build steady organic compounding traffic."
+        ]
+      }
+    },
+    {
+      params: { slug: 'sql-query-performance-tuner' },
+      props: {
+        title: "Advanced SQL Query Performance Tuner Prompt",
+        category: "Software Development",
+        description: "Optimize slow-running database queries, analyze execution plans, and suggest proper indexing strategies.",
+        image: "[https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=80)",
+        promptText: "Act as a senior database administrator (DBA). Review the following SQL query, identify bottlenecks causing table scans, optimize the JOIN structure, and recommend proper indexing strategies for PostgreSQL:",
+        instructions: "Paste your database schema and slow query below the prompt text.",
+        articleTitle: "Eliminating Database Bottlenecks Through Smart Query Tuning",
+        articleBody: [
+          "Database performance degradation is one of the primary catalysts for application scaling failures. Inefficient JOIN operations and unindexed foreign keys can quickly turn milliseconds of response time into sluggish multi-second delays.",
+          "This prompt directs the AI to evaluate query execution structures, recommend composite indexes, and rewrite subqueries into high-performance CTEs (Common Table Expressions) where appropriate.",
+          "Always test query optimizations on staging databases with realistic production data volumes before deploying modifications to live environments."
+        ]
+      }
+    },
+    {
+      params: { slug: 'react-component-clean-architecture' },
+      props: {
+        title: "React Functional Component Clean Architecture Prompt",
+        category: "Software Development",
+        description: "Design modular, high-performance React components using custom hooks, TypeScript types, and accessibility best practices.",
+        image: "[https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80)",
+        promptText: "Act as a principal frontend architect. Write a production-ready React component using TypeScript, Tailwind CSS, and custom hooks. Implement proper memoization, accessibility (WAI-ARIA roles), and robust prop typing:",
+        instructions: "Specify your UI component requirements (e.g., 'Data table with sorting and filtering') after the prompt.",
+        articleTitle: "Scaling Frontend Applications with Clean Component Architecture",
+        articleBody: [
+          "As frontend web applications expand, unorganized React components lead to massive bundle sizes, prop-drilling headaches, and sluggish re-renders. Enforcing strict component boundaries and extracting logic into custom hooks is vital for maintainability.",
+          "This prompt guides the AI to structure components following atomic design principles while integrating strict TypeScript interfaces and accessibility attributes out of the box.",
+          "Review the generated hook segregation to ensure state management remains localized and efficient across complex component trees."
+        ]
+      }
+    },
+    {
+      params: { slug: 'youtube-viral-video-hook-script' },
+      props: {
+        title: "YouTube Viral Video Hook & Script Structure Prompt",
+        category: "Content & Media",
+        description: "Engineer high-retention video intros and structured YouTube scripts designed to maximize audience retention metrics.",
+        image: "[https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80)",
+        promptText: "Act as an expert YouTube growth strategist. Create a 30-second high-retention video hook and complete structured script outline for a video titled '[Video Title]'. Focus on emotional triggers, open loops, and fast-paced pacing:",
+        instructions: "Input your target video title or content concept in brackets before running.",
+        articleTitle: "Mastering Audience Retention Through Strategic Script Engineering",
+        articleBody: [
+          "The first 30 seconds of any digital video determine whether viewers stay or click away. YouTube's recommendation algorithm heavily weights audience retention curves when determining organic reach and impression distribution.",
+          "This prompt avoids slow introductions or channel branding fluff, forcing the AI model to construct an instant 'open loop' psychological hook followed by rapid pacing frameworks.",
+          "Pair the generated script sections with dynamic B-roll suggestions to maintain sustained visual engagement throughout the core content delivery."
+        ]
+      }
+    },
+    {
+      params: { slug: 'saas-pricing-strategy-generator' },
+      props: {
+        title: "SaaS Tiered Pricing & Packaging Strategy Prompt",
+        category: "Business & Growth",
+        description: "Design value-based tiered pricing models and packaging frameworks for B2B and consumer SaaS software products.",
+        image: "[https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80](https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80)",
+        promptText: "Act as a veteran SaaS pricing strategist. Design a 3-tier value-based pricing and feature packaging model for a software product solving '[Problem/Niche]'. Include recommended monthly price points, usage metrics, and upgrade triggers:",
+        instructions: "Describe your core software solution briefly after filling in the niche details.",
+        articleTitle: "Optimizing SaaS Monetization Through Value-Based Packaging",
+        articleBody: [
+          "Pricing is often the most neglected growth lever for early-stage software startups. Relying on guesswork or arbitrary flat-rate pricing leaves substantial recurring revenue on the table and misaligns product value from customer willingness to pay.",
+          "This prompt evaluates feature gating strategies based on true usage metrics (such as active seats, data throughput, or API calls) rather than arbitrary artificial limitations.",
+          "Test the resulting pricing tiers against your target customer segments during user discovery calls to validate psychological price anchoring before public launch."
+        ]
+      }
     }
   ];
 }
