@@ -2,45 +2,31 @@
 const prompts = [
   {
     title: "Complex Document Summarization",
-    category: "Engineering",
-    categorySlug: "engineering",
-    slug: "complex-document-summarization",
-    description: "Transforms long articles and corporate reports into a concise 5-bullet executive summary."
+    category: "Engineering & Analysis",
+    description: "Transforms long articles and corporate reports into a concise 5-bullet executive summary.",
+    image: "[https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80)",
+    slug: "complex-document-summarization"
   },
   {
     title: "Cold Email Sales Sequence",
-    category: "Marketing",
-    categorySlug: "marketing",
-    slug: "cold-email-sales-sequence",
-    description: "Generates high-converting 3-step B2B cold outreach email series tailored for SaaS products."
+    category: "Marketing & Sales",
+    description: "Generates high-converting 3-step B2B cold outreach email series tailored for SaaS products.",
+    image: "[https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80)",
+    slug: "cold-email-sales-sequence"
   },
   {
     title: "Code Refactoring & Optimization",
-    category: "Development",
-    categorySlug: "development",
-    slug: "code-refactoring-optimization",
-    description: "Cleans up complex, slow code applying TypeScript best practices and design patterns."
+    category: "Software Development",
+    description: "Cleans up complex, slow code applying TypeScript best practices and design patterns.",
+    image: "[https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80)",
+    slug: "code-refactoring-optimization"
   },
   {
-    title: "SEO-Optimized Article Outline",
-    category: "Content",
-    categorySlug: "content",
-    slug: "seo-optimized-article-outline",
-    description: "Creates comprehensive H2/H3 structured content plans designed to rank high on search engines."
-  },
-  {
-    title: "Photorealistic Midjourney Portrait",
-    category: "Design",
-    categorySlug: "design",
-    slug: "photorealistic-midjourney-portrait",
-    description: "Cinematic, 8k resolution hyperrealistic prompt for generating professional human portraits."
-  },
-  {
-    title: "B2B Sales Objection Handling",
-    category: "Sales",
-    categorySlug: "sales",
-    slug: "b2b-sales-objection-handling",
-    description: "Provides persuasive strategies and responses to handle common pricing and timing sales objections."
+    title: "Photorealistic Studio Portrait",
+    category: "Design & Midjourney",
+    description: "Cinematic, 8k resolution hyperrealistic prompt for generating professional human portraits.",
+    image: "[https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80](https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80)",
+    slug: "photorealistic-midjourney-portrait"
   }
 ];
 ---
@@ -51,7 +37,7 @@ const prompts = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All AI Prompts Directory — PromptVibe HQ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="[https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap)" rel="stylesheet">
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body { background-color: #0e0e0e; color: #e0e0e0; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
@@ -62,30 +48,26 @@ const prompts = [
       .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
       .logo-dot { width: 12px; height: 12px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
       nav { display: flex; align-items: center; gap: 24px; }
-      nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+      nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; }
       nav a:hover, nav a.active { color: #fff; }
       
       .hero { padding: 48px 0 24px 0; }
       h1 { font-size: 48px; font-weight: 400; color: #fff; margin-bottom: 12px; }
       .hero-p { font-size: 16px; color: #a3a3a3; }
-      
-      .category-bar { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 24px; border-bottom: 1px solid #262626; margin-bottom: 48px; margin-top: 24px; }
-      .cat-btn { background-color: #171717; border: 1px solid #262626; color: #a3a3a3; padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-family: monospace; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
-      .cat-btn:hover { background-color: #22c55e; color: #000; border-color: #22c55e; }
 
-      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; }
-      .card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; text-decoration: none; }
-      .card:hover { border-color: #22c55e; transform: translateY(-2px); }
-      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #d4d4d4; display: inline-block; margin-bottom: 16px; width: fit-content; }
-      .card-title { font-size: 24px; color: #fff; margin-bottom: 12px; }
-      .card-desc { color: #a3a3a3; font-size: 14px; font-weight: 300; line-height: 1.6; margin-bottom: 24px; }
-      .view-btn { width: 100%; padding: 12px; background-color: #262626; color: #fff; border: none; border-radius: 12px; font-weight: 500; font-size: 14px; text-align: center; display: block; transition: all 0.2s; }
-      .card:hover .view-btn { background-color: #22c55e; color: #000; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 32px; }
+      .card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; overflow: hidden; transition: all 0.2s; text-decoration: none; display: flex; flex-direction: column; }
+      .card:hover { border-color: #22c55e; transform: translateY(-3px); }
+      .card-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #262626; }
+      .card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #22c55e; display: inline-block; margin-bottom: 12px; width: fit-content; }
+      .card-title { font-size: 22px; color: #fff; margin-bottom: 12px; }
+      .card-desc { color: #a3a3a3; font-size: 14px; font-weight: 300; line-height: 1.6; margin-bottom: 20px; }
+      .btn-link { font-size: 13px; font-family: monospace; color: #22c55e; font-weight: 600; }
 
       footer { border-top: 1px solid #262626; margin-top: 80px; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
       .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
       .footer-links a { color: #a3a3a3; text-decoration: none; }
-      .footer-links a:hover { color: #fff; }
     </style>
   </head>
   <body>
@@ -107,30 +89,21 @@ const prompts = [
 
     <main class="container" style="flex-grow: 1;">
       <div class="hero">
-        <h1 class="font-serif-title">All AI Prompts</h1>
-        <p class="hero-p">Explore our complete collection of production-ready prompts categorized for efficiency.</p>
-      </div>
-
-      <div class="category-bar">
-        <a href="/prompts" class="cat-btn" style="background-color: #22c55e; color: #000; border-color: #22c55e;">All</a>
-        <a href="/category/engineering" class="cat-btn">Engineering</a>
-        <a href="/category/marketing" class="cat-btn">Marketing</a>
-        <a href="/category/development" class="cat-btn">Development</a>
-        <a href="/category/content" class="cat-btn">Content</a>
-        <a href="/category/design" class="cat-btn">Design</a>
-        <a href="/category/sales" class="cat-btn">Sales</a>
+        <h1 class="font-serif-title">Explore All AI Prompts</h1>
+        <p class="hero-p">Click any prompt card to view visual samples, engineered parameters, and copyable commands.</p>
       </div>
 
       <div class="grid">
         {prompts.map((item) => (
           <a href={`/prompt/${item.slug}`} class="card">
-            <div>
-              <span class="category-tag">{item.category}</span>
-              <h3 class="card-title font-serif-title">{item.title}</h3>
-              <p class="card-desc">{item.description}</p>
-            </div>
-            <div>
-              <span class="view-btn">View Prompt Page →</span>
+            <img src={item.image} alt={item.title} class="card-img" />
+            <div class="card-body">
+              <div>
+                <span class="category-tag">{item.category}</span>
+                <h3 class="card-title font-serif-title">{item.title}</h3>
+                <p class="card-desc">{item.description}</p>
+              </div>
+              <span class="btn-link">Read Guide & Copy Prompt →</span>
             </div>
           </a>
         ))}

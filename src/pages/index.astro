@@ -1,48 +1,4 @@
 ---
-const prompts = [
-  {
-    title: "Complex Document Summarization",
-    category: "Engineering",
-    categorySlug: "engineering",
-    slug: "complex-document-summarization",
-    description: "Transforms long articles and corporate reports into a concise 5-bullet executive summary."
-  },
-  {
-    title: "Cold Email Sales Sequence",
-    category: "Marketing",
-    categorySlug: "marketing",
-    slug: "cold-email-sales-sequence",
-    description: "Generates high-converting 3-step B2B cold outreach email series tailored for SaaS products."
-  },
-  {
-    title: "Code Refactoring & Optimization",
-    category: "Development",
-    categorySlug: "development",
-    slug: "code-refactoring-optimization",
-    description: "Cleans up complex, slow code applying TypeScript best practices and design patterns."
-  },
-  {
-    title: "SEO-Optimized Article Outline",
-    category: "Content",
-    categorySlug: "content",
-    slug: "seo-optimized-article-outline",
-    description: "Creates comprehensive H2/H3 structured content plans designed to rank high on search engines."
-  },
-  {
-    title: "Photorealistic Midjourney Portrait",
-    category: "Design",
-    categorySlug: "design",
-    slug: "photorealistic-midjourney-portrait",
-    description: "Cinematic, 8k resolution hyperrealistic prompt for generating professional human portraits."
-  },
-  {
-    title: "B2B Sales Objection Handling",
-    category: "Sales",
-    categorySlug: "sales",
-    slug: "b2b-sales-objection-handling",
-    description: "Provides persuasive strategies and responses to handle common pricing and timing sales objections."
-  }
-];
 ---
 
 <!DOCTYPE html>
@@ -65,23 +21,29 @@ const prompts = [
       nav { display: flex; align-items: center; gap: 24px; }
       nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; transition: color 0.2s; }
       nav a:hover { color: #fff; }
-      .hero { padding: 64px 0 32px 0; display: flex; flex-direction: column; gap: 24px; }
-      .badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-family: monospace; background-color: #171717; border: 1px solid #262626; color: #22c55e; width: fit-content; }
-      h1 { font-size: 56px; font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; }
+      
+      .hero { padding: 80px 0 48px 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+      .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 9999px; font-size: 12px; font-family: monospace; background-color: #171717; border: 1px solid #262626; color: #22c55e; }
+      h1 { font-size: 58px; font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; max-width: 800px; }
       h1 span { font-style: italic; color: #a3a3a3; }
       .hero-p { font-size: 18px; color: #a3a3a3; font-weight: 300; max-width: 600px; line-height: 1.6; }
-      .category-bar { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 24px; border-bottom: 1px solid #262626; margin-bottom: 48px; margin-top: 24px; }
-      .cat-btn { background-color: #171717; border: 1px solid #262626; color: #a3a3a3; padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-family: monospace; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
-      .cat-btn:hover, .cat-btn.active { background-color: #22c55e; color: #000; border-color: #22c55e; }
-      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; }
-      .card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; text-decoration: none; }
-      .card:hover { border-color: #22c55e; transform: translateY(-2px); }
-      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #d4d4d4; display: inline-block; margin-bottom: 16px; width: fit-content; }
-      .card-title { font-size: 24px; color: #fff; margin-bottom: 12px; }
-      .card-desc { color: #a3a3a3; font-size: 14px; font-weight: 300; line-height: 1.6; margin-bottom: 24px; }
-      .view-btn { width: 100%; padding: 12px; background-color: #262626; color: #fff; border: none; border-radius: 12px; font-weight: 500; font-size: 14px; text-align: center; display: block; transition: all 0.2s; }
-      .card:hover .view-btn { background-color: #22c55e; color: #000; }
-      footer { border-top: 1px solid #262626; margin-top: 80px; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
+      
+      .cta-buttons { display: flex; gap: 16px; margin-top: 12px; }
+      .btn-main { background-color: #22c55e; color: #000; padding: 14px 28px; border-radius: 9999px; font-weight: 600; text-decoration: none; transition: background-color 0.2s; }
+      .btn-main:hover { background-color: #16a34a; }
+      .btn-sec { background-color: #171717; border: 1px solid #262626; color: #fff; padding: 14px 28px; border-radius: 9999px; font-weight: 500; text-decoration: none; transition: border-color 0.2s; }
+      .btn-sec:hover { border-color: #404040; }
+
+      .categories-section { padding: 48px 0 80px 0; border-top: 1px solid #262626; }
+      .section-title { font-size: 32px; color: #fff; margin-bottom: 32px; text-align: center; }
+      .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+      .cat-card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; padding: 32px; text-decoration: none; transition: all 0.2s; display: flex; flex-direction: column; gap: 12px; }
+      .cat-card:hover { border-color: #22c55e; transform: translateY(-3px); }
+      .cat-card h3 { font-size: 22px; color: #fff; }
+      .cat-card p { font-size: 14px; color: #a3a3a3; font-weight: 300; line-height: 1.5; }
+      .cat-link { font-size: 13px; font-family: monospace; color: #22c55e; margin-top: 8px; }
+
+      footer { border-top: 1px solid #262626; margin-top: auto; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
       .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
       .footer-links a { color: #a3a3a3; text-decoration: none; }
       .footer-links a:hover { color: #fff; }
@@ -96,6 +58,7 @@ const prompts = [
           PromptVibe<span style="font-style: italic; font-weight: 400; color: #a3a3a3;">HQ</span>
         </a>
         <nav>
+          <a href="/prompts">All Prompts</a>
           <a href="/about">About</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/contact">Contact</a>
@@ -113,39 +76,55 @@ const prompts = [
           <span>& AI engineering.</span>
         </h1>
         <p class="hero-p">
-          Production-ready prompts engineered for ChatGPT, Claude, and Midjourney to scale your daily workflows.
+          Discover battle-tested, production-ready artificial intelligence prompts designed for ChatGPT, Claude, and Midjourney.
         </p>
+        <div class="cta-buttons">
+          <a href="/prompts" class="btn-main">Explore All Prompts →</a>
+          <a href="/about" class="btn-sec">Learn More</a>
+        </div>
       </div>
 
-      <div class="category-bar">
-        <a href="/" class="cat-btn active">All</a>
-        <a href="/category/engineering" class="cat-btn">Engineering</a>
-        <a href="/category/marketing" class="cat-btn">Marketing</a>
-        <a href="/category/development" class="cat-btn">Development</a>
-        <a href="/category/content" class="cat-btn">Content</a>
-        <a href="/category/design" class="cat-btn">Design</a>
-        <a href="/category/sales" class="cat-btn">Sales</a>
-      </div>
-
-      <div class="grid">
-        {prompts.map((item) => (
-          <a href={`/prompt/${item.slug}`} class="card">
-            <div>
-              <span class="category-tag">{item.category}</span>
-              <h3 class="card-title font-serif-title">{item.title}</h3>
-              <p class="card-desc">{item.description}</p>
-            </div>
-            <div>
-              <span class="view-btn">View Prompt Page →</span>
-            </div>
+      <div class="categories-section">
+        <h2 class="section-title font-serif-title">Browse Category Hubs</h2>
+        <div class="cat-grid">
+          <a href="/prompts" class="cat-card">
+            <h3 class="font-serif-title">Engineering</h3>
+            <p>Complex document summarization, code analysis, and system architecture prompts.</p>
+            <span class="cat-link">Browse Library →</span>
           </a>
-        ))}
+          <a href="/prompts" class="cat-card">
+            <h3 class="font-serif-title">Marketing</h3>
+            <p>High-converting cold email sequences, ad copies, and growth strategies.</p>
+            <span class="cat-link">Browse Library →</span>
+          </a>
+          <a href="/prompts" class="cat-card">
+            <h3 class="font-serif-title">Development</h3>
+            <p>TypeScript code refactoring, bug fixing, and clean code optimization workflows.</p>
+            <span class="cat-link">Browse Library →</span>
+          </a>
+          <a href="/prompts" class="cat-card">
+            <h3 class="font-serif-title">Content</h3>
+            <p>SEO-optimized blog outlines, long-form content planning, and copywriting frameworks.</p>
+            <span class="cat-link">Browse Library →</span>
+          </a>
+          <a href="/prompts" class="cat-card">
+            <h3 class="font-serif-title">Design</h3>
+            <p>Photorealistic Midjourney parameters, cinematic lighting setups, and UI design prompts.</p>
+            <span class="cat-link">Browse Library →</span>
+          </a>
+          <a href="/prompts" class="cat-card">
+            <h3 class="font-serif-title">Sales</h3>
+            <p>B2B objection handling strategies, pitch structuring, and conversion scripts.</p>
+            <span class="cat-link">Browse Library →</span>
+          </a>
+        </div>
       </div>
     </main>
 
     <footer>
       <div class="footer-links">
         <a href="/">Home</a>
+        <a href="/prompts">All Prompts</a>
         <a href="/about">About Us</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/contact">Contact</a>
