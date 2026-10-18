@@ -1,42 +1,46 @@
 ---
-const categories = ["All", "Engineering", "Marketing", "Development", "Content", "Design", "Sales"];
-
 const prompts = [
   {
     title: "Complex Document Summarization",
     category: "Engineering",
-    description: "Transforms long articles and corporate reports into a concise 5-bullet executive summary.",
-    prompt: "Act as a senior business analyst. Analyze the following text and extract key insights, major risks, and recommended next steps into a concise 5-bullet executive summary:"
+    categorySlug: "engineering",
+    slug: "complex-document-summarization",
+    description: "Transforms long articles and corporate reports into a concise 5-bullet executive summary."
   },
   {
     title: "Cold Email Sales Sequence",
     category: "Marketing",
-    description: "Generates high-converting 3-step B2B cold outreach email series tailored for SaaS products.",
-    prompt: "Act as an expert copywriter. Write a personalized 3-step B2B cold email sequence targeting Marketing Directors for a B2B SaaS product. Keep each email under 120 words."
+    categorySlug: "marketing",
+    slug: "cold-email-sales-sequence",
+    description: "Generates high-converting 3-step B2B cold outreach email series tailored for SaaS products."
   },
   {
     title: "Code Refactoring & Optimization",
     category: "Development",
-    description: "Cleans up complex, slow code applying TypeScript best practices and design patterns.",
-    prompt: "Assume the role of a senior software engineer. Review the following code snippet, identify performance bottlenecks, and refactor it using clean code principles and TypeScript best practices:"
+    categorySlug: "development",
+    slug: "code-refactoring-optimization",
+    description: "Cleans up complex, slow code applying TypeScript best practices and design patterns."
   },
   {
     title: "SEO-Optimized Article Outline",
     category: "Content",
-    description: "Creates comprehensive H2/H3 structured content plans designed to rank high on search engines.",
-    prompt: "Act as an expert SEO strategist. Create a detailed article outline for a 2000-word blog post on [Topic] using the AIDA framework, including LSI keywords and structured H2/H3 headings."
+    categorySlug: "content",
+    slug: "seo-optimized-article-outline",
+    description: "Creates comprehensive H2/H3 structured content plans designed to rank high on search engines."
   },
   {
     title: "Photorealistic Midjourney Portrait",
     category: "Design",
-    description: "Cinematic, 8k resolution hyperrealistic prompt for generating professional human portraits.",
-    prompt: "A realistic portrait photo of a 30-year-old architect, cinematic lighting, 85mm lens, f/1.8, highly detailed skin texture, professional studio background, hyperrealistic, 8k resolution --ar 16:9 --v 6.0"
+    categorySlug: "design",
+    slug: "photorealistic-midjourney-portrait",
+    description: "Cinematic, 8k resolution hyperrealistic prompt for generating professional human portraits."
   },
   {
     title: "B2B Sales Objection Handling",
     category: "Sales",
-    description: "Provides persuasive strategies and responses to handle common pricing and timing sales objections.",
-    prompt: "Act as an expert B2B sales coach. Provide 3 empathetic and value-focused responses to handle the prospect objection: 'Our budget is currently frozen for this quarter.'"
+    categorySlug: "sales",
+    slug: "b2b-sales-objection-handling",
+    description: "Provides persuasive strategies and responses to handle common pricing and timing sales objections."
   }
 ];
 ---
@@ -48,72 +52,35 @@ const prompts = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PromptVibe HQ — Battle-Tested AI Prompts Directory</title>
     <meta name="description" content="Free production-ready AI prompt library for ChatGPT, Claude, and Midjourney." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      body {
-        background-color: #0e0e0e;
-        color: #e0e0e0;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+      body { background-color: #0e0e0e; color: #e0e0e0; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
       .font-serif-title { font-family: 'Newsreader', serif; }
       .container { max-width: 1150px; margin: 0 auto; padding: 0 24px; width: 100%; }
-      header {
-        border-bottom: 1px solid #262626;
-        background-color: rgba(14, 14, 14, 0.9);
-        backdrop-filter: blur(8px);
-        position: sticky; top: 0; z-index: 50; height: 80px;
-        display: flex; align-items: center;
-      }
-      .header-content { display: flex; justify-content: space-between; align-items: center; }
+      header { border-bottom: 1px solid #262626; background-color: rgba(14, 14, 14, 0.9); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; height: 80px; display: flex; align-items: center; }
+      .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
       .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
       .logo-dot { width: 12px; height: 12px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
       nav { display: flex; align-items: center; gap: 24px; }
       nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; transition: color 0.2s; }
       nav a:hover { color: #fff; }
-      .btn-primary { background-color: #fff; color: #000; padding: 10px 20px; border-radius: 9999px; font-weight: 500; text-decoration: none; }
       .hero { padding: 64px 0 32px 0; display: flex; flex-direction: column; gap: 24px; }
-      .badge {
-        display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px;
-        border-radius: 9999px; font-size: 12px; font-family: monospace;
-        background-color: #171717; border: 1px solid #262626; color: #22c55e; width: fit-content;
-      }
+      .badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-family: monospace; background-color: #171717; border: 1px solid #262626; color: #22c55e; width: fit-content; }
       h1 { font-size: 56px; font-weight: 400; line-height: 1.1; color: #fff; letter-spacing: -1px; }
       h1 span { font-style: italic; color: #a3a3a3; }
       .hero-p { font-size: 18px; color: #a3a3a3; font-weight: 300; max-width: 600px; line-height: 1.6; }
-      
-      /* Categories Bar */
-      .category-bar {
-        display: flex; gap: 12px; overflow-x: auto; padding-bottom: 24px;
-        border-bottom: 1px solid #262626; margin-bottom: 48px; margin-top: 24px;
-      }
-      .cat-btn {
-        background-color: #171717; border: 1px solid #262626; color: #a3a3a3;
-        padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-family: monospace;
-        cursor: pointer; transition: all 0.2s; text-decoration: none; whitespace: nowrap;
-      }
+      .category-bar { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 24px; border-bottom: 1px solid #262626; margin-bottom: 48px; margin-top: 24px; }
+      .cat-btn { background-color: #171717; border: 1px solid #262626; color: #a3a3a3; padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-family: monospace; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap; }
       .cat-btn:hover, .cat-btn.active { background-color: #22c55e; color: #000; border-color: #22c55e; }
-
       .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; }
-      .card {
-        background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626;
-        border-radius: 16px; padding: 28px; display: flex; flex-direction: column;
-        justify-content: space-between; transition: border-color 0.2s;
-      }
-      .card:hover { border-color: #404040; }
-      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #d4d4d4; display: inline-block; margin-bottom: 16px; }
+      .card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; text-decoration: none; }
+      .card:hover { border-color: #22c55e; transform: translateY(-2px); }
+      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #d4d4d4; display: inline-block; margin-bottom: 16px; width: fit-content; }
       .card-title { font-size: 24px; color: #fff; margin-bottom: 12px; }
       .card-desc { color: #a3a3a3; font-size: 14px; font-weight: 300; line-height: 1.6; margin-bottom: 24px; }
-      .prompt-box { background-color: #080808; border: 1px solid #262626; border-radius: 12px; padding: 16px; font-size: 12px; color: #d4d4d4; font-family: monospace; line-height: 1.6; margin-bottom: 16px; max-height: 120px; overflow-y: auto; }
-      .copy-btn { width: 100%; padding: 12px; background-color: #262626; color: #fff; border: none; border-radius: 12px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.2s; }
-      .copy-btn:hover { background-color: #22c55e; color: #000; }
-      
+      .view-btn { width: 100%; padding: 12px; background-color: #262626; color: #fff; border: none; border-radius: 12px; font-weight: 500; font-size: 14px; text-align: center; display: block; transition: all 0.2s; }
+      .card:hover .view-btn { background-color: #22c55e; color: #000; }
       footer { border-top: 1px solid #262626; margin-top: 80px; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
       .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
       .footer-links a { color: #a3a3a3; text-decoration: none; }
@@ -122,7 +89,6 @@ const prompts = [
   </head>
   <body>
     
-    <!-- Header -->
     <header>
       <div class="container header-content">
         <a href="/" class="logo font-serif-title">
@@ -132,12 +98,11 @@ const prompts = [
         <nav>
           <a href="/about">About</a>
           <a href="/privacy">Privacy Policy</a>
-          <a href="/about" class="btn-primary">Submit Prompt</a>
+          <a href="/contact">Contact</a>
         </nav>
       </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container" style="flex-grow: 1;">
       <div class="hero">
         <div class="badge">
@@ -152,42 +117,38 @@ const prompts = [
         </p>
       </div>
 
-      <!-- Categories Filter Bar -->
       <div class="category-bar">
-        {categories.map((cat, idx) => (
-          <a href="#" class={`cat-btn ${idx === 0 ? 'active' : ''}`}>{cat}</a>
-        ))}
+        <a href="/" class="cat-btn active">All</a>
+        <a href="/category/engineering" class="cat-btn">Engineering</a>
+        <a href="/category/marketing" class="cat-btn">Marketing</a>
+        <a href="/category/development" class="cat-btn">Development</a>
+        <a href="/category/content" class="cat-btn">Content</a>
+        <a href="/category/design" class="cat-btn">Design</a>
+        <a href="/category/sales" class="cat-btn">Sales</a>
       </div>
 
-      <!-- Prompt Cards Grid -->
       <div class="grid">
         {prompts.map((item) => (
-          <div class="card">
+          <a href={`/prompt/${item.slug}`} class="card">
             <div>
               <span class="category-tag">{item.category}</span>
               <h3 class="card-title font-serif-title">{item.title}</h3>
               <p class="card-desc">{item.description}</p>
             </div>
             <div>
-              <div class="prompt-box">{item.prompt}</div>
-              <button
-                class="copy-btn"
-                onclick={`navigator.clipboard.writeText(\`${item.prompt.replace(/`/g, '\\`')}\`); this.innerText = 'Copied! ✓'; setTimeout(() => this.innerText = 'Copy Prompt 📋', 2000);`}
-              >
-                Copy Prompt 📋
-              </button>
+              <span class="view-btn">View Prompt Page →</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </main>
 
-    <!-- AdSense Compliant Footer -->
     <footer>
       <div class="footer-links">
         <a href="/">Home</a>
         <a href="/about">About Us</a>
         <a href="/privacy">Privacy Policy</a>
+        <a href="/contact">Contact</a>
       </div>
       <p>© 2026 PromptVibe HQ. All rights reserved.</p>
     </footer>
