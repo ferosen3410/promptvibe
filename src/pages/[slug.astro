@@ -1,0 +1,169 @@
+---
+export function getStaticPaths() {
+  return [
+    { 
+      params: { slug: 'complex-document-summarization' }, 
+      props: { 
+        title: "Complex Document Summarization",
+        category: "Engineering",
+        categorySlug: "engineering",
+        description: "Transforms long articles and corporate reports into a concise 5-bullet executive summary.",
+        prompt: "Act as a senior business analyst. Analyze the following text and extract key insights, major risks, and recommended next steps into a concise 5-bullet executive summary:",
+        instructions: "Copy this prompt and paste it into ChatGPT (GPT-4) or Claude 3.5 Sonnet along with your raw text or PDF content. It will automatically structure the output for executive readability."
+      } 
+    },
+    { 
+      params: { slug: 'cold-email-sales-sequence' }, 
+      props: { 
+        title: "Cold Email Sales Sequence",
+        category: "Marketing",
+        categorySlug: "marketing",
+        description: "Generates high-converting 3-step B2B cold outreach email series tailored for SaaS products.",
+        prompt: "Act as an expert copywriter. Write a personalized 3-step B2B cold email sequence targeting Marketing Directors for a B2B SaaS product. Keep each email under 120 words.",
+        instructions: "Replace 'B2B SaaS product' and 'Marketing Directors' with your target audience and offer details before sending."
+      } 
+    },
+    { 
+      params: { slug: 'code-refactoring-optimization' }, 
+      props: { 
+        title: "Code Refactoring & Optimization",
+        category: "Development",
+        categorySlug: "development",
+        description: "Cleans up complex, slow code applying TypeScript best practices and design patterns.",
+        prompt: "Assume the role of a senior software engineer. Review the following code snippet, identify performance bottlenecks, and refactor it using clean code principles and TypeScript best practices:",
+        instructions: "Paste your unoptimized function below the prompt in your AI workspace."
+      } 
+    },
+    { 
+      params: { slug: 'seo-optimized-article-outline' }, 
+      props: { 
+        title: "SEO-Optimized Article Outline",
+        category: "Content",
+        categorySlug: "content",
+        description: "Creates comprehensive H2/H3 structured content plans designed to rank high on search engines.",
+        prompt: "Act as an expert SEO strategist. Create a detailed article outline for a 2000-word blog post on [Topic] using the AIDA framework, including LSI keywords and structured H2/H3 headings.",
+        instructions: "Fill in your target [Topic] in the bracketed area."
+      } 
+    },
+    { 
+      params: { slug: 'photorealistic-midjourney-portrait' }, 
+      props: { 
+        title: "Photorealistic Midjourney Portrait",
+        category: "Design",
+        categorySlug: "design",
+        description: "Cinematic, 8k resolution hyperrealistic prompt for generating professional human portraits.",
+        prompt: "A realistic portrait photo of a 30-year-old architect, cinematic lighting, 85mm lens, f/1.8, highly detailed skin texture, professional studio background, hyperrealistic, 8k resolution --ar 16:9 --v 6.0",
+        instructions: "Copy directly into Discord Midjourney bot (/imagine command)."
+      } 
+    },
+    { 
+      params: { slug: 'b2b-sales-objection-handling' }, 
+      props: { 
+        title: "B2B Sales Objection Handling",
+        category: "Sales",
+        categorySlug: "sales",
+        description: "Provides persuasive strategies and responses to handle common pricing and timing sales objections.",
+        prompt: "Act as an expert B2B sales coach. Provide 3 empathetic and value-focused responses to handle the prospect objection: 'Our budget is currently frozen for this quarter.'",
+        instructions: "Use this to prepare script variations for sales call follow-ups."
+      } 
+    }
+  ];
+}
+
+const { title, category, categorySlug, description, prompt, instructions } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — PromptVibe HQ</title>
+    <meta name="description" content={description} />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background-color: #0e0e0e; color: #e0e0e0; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+      .font-serif-title { font-family: 'Newsreader', serif; }
+      .container { max-width: 900px; margin: 0 auto; padding: 0 24px; width: 100%; }
+      header { border-bottom: 1px solid #262626; background-color: rgba(14, 14, 14, 0.9); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 50; height: 80px; display: flex; align-items: center; }
+      .header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+      .logo { font-size: 24px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+      .logo-dot { width: 12px; height: 12px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
+      nav { display: flex; align-items: center; gap: 24px; }
+      nav a { color: #a3a3a3; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+      nav a:hover { color: #fff; }
+      
+      .main-content { padding: 48px 0; flex-grow: 1; }
+      .back-link { color: #22c55e; text-decoration: none; font-size: 14px; font-family: monospace; display: inline-block; margin-bottom: 24px; }
+      .category-tag { font-size: 12px; font-family: monospace; padding: 4px 12px; border-radius: 9999px; background-color: #262626; color: #d4d4d4; text-decoration: none; display: inline-block; margin-bottom: 16px; }
+      h1 { font-size: 42px; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+      .description { font-size: 18px; color: #a3a3a3; font-weight: 300; line-height: 1.6; margin-bottom: 32px; }
+      
+      .prompt-card { background-color: #171717; border: 1px solid #262626; border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+      .prompt-title { font-size: 14px; font-family: monospace; color: #22c55e; margin-bottom: 12px; }
+      .prompt-box { background-color: #080808; border: 1px solid #262626; border-radius: 12px; padding: 20px; font-size: 14px; color: #fff; font-family: monospace; line-height: 1.7; margin-bottom: 20px; white-space: pre-wrap; }
+      .copy-btn { width: 100%; padding: 14px; background-color: #22c55e; color: #000; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; }
+      .copy-btn:hover { background-color: #16a34a; }
+
+      .instructions-card { background-color: rgba(23, 23, 23, 0.5); border: 1px solid #262626; border-radius: 16px; padding: 24px; }
+      .instructions-card h3 { color: #fff; font-size: 18px; margin-bottom: 8px; }
+      .instructions-card p { color: #a3a3a3; font-size: 14px; line-height: 1.6; }
+
+      footer { border-top: 1px solid #262626; margin-top: 80px; padding: 40px 0; text-align: center; color: #737373; font-size: 12px; font-family: monospace; }
+      .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+      .footer-links a { color: #a3a3a3; text-decoration: none; }
+      .footer-links a:hover { color: #fff; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-content">
+        <a href="/" class="logo font-serif-title">
+          <span class="logo-dot"></span>
+          PromptVibe<span style="font-style: italic; font-weight: 400; color: #a3a3a3;">HQ</span>
+        </a>
+        <nav>
+          <a href="/about">About</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main-content">
+      <a href="/" class="back-link">← Back to All Prompts</a>
+      <div>
+        <a href={`/category/${categorySlug}`} class="category-tag">{category}</a>
+        <h1 class="font-serif-title">{title}</h1>
+        <p class="description">{description}</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-title">COPYABLE AI PROMPT</div>
+        <div class="prompt-box" id="promptText">{prompt}</div>
+        <button
+          class="copy-btn"
+          onclick={`navigator.clipboard.writeText(document.getElementById('promptText').innerText); this.innerText = 'Copied to Clipboard! 🎉'; setTimeout(() => this.innerText = 'Copy Prompt 📋', 2000);`}
+        >
+          Copy Prompt 📋
+        </button>
+      </div>
+
+      <div class="instructions-card">
+        <h3>How to use this prompt:</h3>
+        <p>{instructions}</p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <p>© 2026 PromptVibe HQ. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
