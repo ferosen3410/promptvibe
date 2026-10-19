@@ -4,7 +4,7 @@ export const SITE = {
   tagline: 'AI prompts with worked examples, variations and common mistakes',
   description:
     'A free library of AI prompts for ChatGPT, Claude and Midjourney. Every prompt comes with a worked example, variations for different situations and the mistakes that most often ruin the result.',
-  email: 'support@promptvibehq.com',
+  email: 'ferosen3410@gmail.com',
   // AdSense onaylandıktan sonra doldurun, örn. 'ca-pub-1234567890123456'.
   adsensePublisherId: '',
   // Google Analytics 4 ölçüm kimliği, örn. 'G-XXXXXXXXXX'. Boş bırakırsanız yüklenmez.
