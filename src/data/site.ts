@@ -34,3 +34,8 @@ export const FOOTER_LINKS = [
   { href: '/privacy', label: 'Privacy Policy' },
   { href: '/terms', label: 'Terms of Use' },
 ];
+export const SOCIAL_LINKS = [
+  { name: 'TikTok', href: 'https://www.tiktok.com/@promptvibehq' },
+  { name: 'YouTube', href: 'https://www.youtube.com/@promptvibehq' },
+  { name: 'Instagram', href: 'https://www.instagram.com/promptvibehq' },
+];

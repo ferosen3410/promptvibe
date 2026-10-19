@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE, NAV, FOOTER_LINKS } from '../data/site';
+import { SITE, NAV, FOOTER_LINKS, SOCIAL_LINKS } from '../data/site';
 import { categories } from '../data/prompts';
 
 interface Props {
@@ -21,7 +21,8 @@ const year = new Date().getFullYear();
 const current = path;
 ---
 
-
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -111,10 +112,48 @@ const current = path;
             ))}
           </ul>
         </div>
+        <div>
+          <p class="footer-title">Socials</p>
+          <ul class="footer-list">
+            {SOCIAL_LINKS.map((s) => (
+              <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.name}</a></li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div class="container footer-bottom">
         <p class="muted small">&copy; {year} {SITE.name}. Prompts are free to use. AI output can contain mistakes, so always review it before relying on it.</p>
       </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md bg-slate-900 border border-slate-800 text-slate-200 p-4 rounded-xl shadow-2xl z-50 hidden flex-col gap-3">
+      <div class="text-sm">
+        <p>🍪 We use cookies to analyze site traffic and improve your experience on PromptVibe HQ. By continuing to browse, you agree to our use of cookies.</p>
+      </div>
+      <div class="flex items-center gap-2 justify-end">
+        <button id="accept-cookies" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg transition-colors">
+          Accept All
+        </button>
+      </div>
+    </div>
+
+    <script is:inline>
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('accept-cookies');
+
+      if (banner && acceptBtn) {
+        if (!localStorage.getItem('cookieConsent')) {
+          banner.classList.remove('hidden');
+          banner.classList.add('flex');
+        }
+
+        acceptBtn.addEventListener('click', () => {
+          localStorage.setItem('cookieConsent', 'true');
+          banner.classList.add('hidden');
+          banner.classList.remove('flex');
+        });
+      }
+    </script>
   </body>
 </html>
