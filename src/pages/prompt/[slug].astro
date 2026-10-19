@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PromptCard from '../../components/PromptCard.astro';
+import Cover from '../../components/Cover.astro';
 import { SITE } from '../../data/site';
 import { prompts, getCategory, relatedPrompts, readMinutes, formatDate, type PromptEntry } from '../../data/prompts';
 
@@ -56,9 +57,10 @@ const jsonLd = [
       {minutes} min read &middot; Published {formatDate(entry.published)} &middot; Last reviewed {formatDate(entry.reviewed)}
     </p>
 
-    <!-- Yatay Before / After İki Ayrı Görsel Alanı -->
-    <div class="hero-cover my-6">
-      {entry.slug === '90s-nostalgic-couple-photo-transformation' ? (
+    <!-- Görsel Alanı -->
+    {entry.slug === '90s-nostalgic-couple-photo-transformation' ? (
+      <!-- 1. Sadece 90'lar Çifti Prompt'u İçin Özel Before/After Düzeni -->
+      <div class="hero-cover my-6">
         <div class="comparison-grid">
           <div class="comparison-card">
             <span class="badge before-badge">BEFORE (ORIGINAL)</span>
@@ -72,10 +74,17 @@ const jsonLd = [
             <img src="/after.jpeg" alt="AI Transformed 90s Film Style Photo" />
           </div>
         </div>
-      ) : (
-        <img src={entry.image || "/couple-transformation.jpeg"} alt={entry.title} class="w-full h-auto rounded-2xl border border-neutral-800 object-cover" />
-      )}
-    </div>
+      </div>
+    ) : (
+      <!-- 2. Diğer Tüm Prompt'lar İçin Kendi Görseli veya Dinamik Cover İllüstrasyonu -->
+      <div class="hero-cover my-6" style="border-radius: 1rem; overflow: hidden; border: 1px solid #262626;">
+        {entry.image ? (
+          <img src={entry.image} alt={entry.title} class="w-full h-auto object-cover" />
+        ) : (
+          <Cover category={entry.category} seed={entry.slug} label={`Illustration for ${entry.title}`} />
+        )}
+      </div>
+    )}
 
     {entry.intro.map((para) => <p>{para}</p>)}
 
