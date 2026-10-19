@@ -44,14 +44,14 @@ const current = path;
 
     {schemas.map((s) => <script is:inline type="application/ld+json" set:html={JSON.stringify(s)} />)}
 
-    {SITE.adsensePublisherId && (
-      <script
-        is:inline
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsensePublisherId}`}
-        crossorigin="anonymous"
-      ></script>
-    )}
+    <!-- Google AdSense Direct Code -->
+    <script
+      is:inline
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2351081886015608"
+      crossorigin="anonymous"
+    ></script>
+
     {SITE.analyticsId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analyticsId}`}></script>}
     {SITE.analyticsId && (
       <script
